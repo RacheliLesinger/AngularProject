@@ -35,7 +35,7 @@ saveNewUser()
 
     first_name: "first name",
     last_name: "last name",
-    status:"status"
+    status:"student"
     //faculty:faculty
   };
 
