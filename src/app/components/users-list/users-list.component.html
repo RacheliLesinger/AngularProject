@@ -1,0 +1,76 @@
+
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by name"
+          [(ngModel)]="title"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchTitle()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Users List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let user of users; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveUser(user, i)"
+        >
+          {{ user.username }}
+        </li>
+      </ul>
+  
+      <mat-list>
+        <mat-list-item *ngFor="let user of users">
+            <img matListAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu">
+            <h3 matLine> {{user.first_name}}  {{user.last_name}}</h3>
+            <p matLine>
+                <span> {{user.username}} </span>
+                <span class="demo-2"> -- {{user.password}} </span>
+            </p>
+        </mat-list-item>
+      </mat-list>
+
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
+        Remove All
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentTutorial">
+        <h4>Tutorial</h4>
+        <div>
+          <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+        </div>
+        <div>
+          <label><strong>Description:</strong></label>
+          {{ currentTutorial.description }}
+        </div>
+        <div>
+          <label><strong>Status:</strong></label>
+          {{ currentTutorial.published ? "Published" : "Pending" }}
+        </div>
+  
+        <a class="badge badge-warning" href="/tutorials/{{ currentTutorial.id }}">
+          Edit
+        </a>
+      </div>
+  
+      <div *ngIf="!currentTutorial">
+        <br />
+        <!-- <p>Please click on a Tutorial...</p> -->
+      </div>
+    </div>
+  </div>
+  

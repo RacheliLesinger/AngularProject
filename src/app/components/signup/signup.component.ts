@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-signup',
@@ -11,18 +12,45 @@ user = {
   name:'',
   email:'',
   password:''
-}
+};
+submitted = false;
 
 onSend({value, valid}){
   if(valid){
     console.log(value);
-  }else{
+    this.saveNewUser();
+  }
+  else{
     console.log("Not Valid")
   }
 }
 
+saveNewUser()
+{
+  debugger;
+  const data = {
+    username: this.user.name,
+    email: this.user.email,
+    password: this.user.password,
 
-  constructor(){}
+    first_name: "first name",
+    last_name: "last name",
+    status:"status"
+    //faculty:faculty
+  };
+
+  this.userService.create(data)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.submitted = true;
+      },
+      error => {
+        console.log(error);
+      });
+}
+
+ constructor(private userService: UserService) { }
 
   ngOnInit() {
   }

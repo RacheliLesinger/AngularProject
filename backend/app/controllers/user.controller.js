@@ -18,8 +18,7 @@ exports.create = (req, res) => {
     status:req.body.status,
     // status:["lecturer", "student"],
     faculty:req.body.faculty,
-    address:req.body.address
-    // published: req.body.published ? req.body.published : false
+    email:req.body.email
   });
 
   // Save User in the database
@@ -95,7 +94,7 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a Tutorial with the specified id in the request
+// Delete a user with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 

@@ -3,7 +3,7 @@ module.exports = mongoose => {
       {
         first_name: { type: String, required: true },
         last_name:  { type: String, required: true },
-        Username: { type: String, required: true },
+        username: { type: String, required: true },
         password: { type: String, required: true },
         // faculty: { type: String, required: true },
         faculty: { 
@@ -12,7 +12,7 @@ module.exports = mongoose => {
         },
         // status:["lecturer", "student"],
         status: { type: String, required: true },
-        Address: { type: String, required: true },
+        email: { type: String, required: true },
       },
       { timestamps: true }//תאריך יצירה
     );

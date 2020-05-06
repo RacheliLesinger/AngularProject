@@ -14,7 +14,9 @@ import { HomeComponent } from './components/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
-
+import { UsersListComponent } from './components/users-list/users-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule, MatButtonModule, MatSelectModule, MatIconModule , MatListModule} from '@angular/material';
 
 const appRoutes: Routes = [
   {path:'home',component:HomeComponent},
@@ -31,14 +33,21 @@ const appRoutes: Routes = [
     TutorialsListComponent,
     HomeComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatInputModule, 
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule,
+    MatListModule
   
   ],
   providers: [],
