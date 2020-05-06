@@ -1,0 +1,78 @@
+<h1>Create your account </h1>
+
+<div class="container mt-4">
+  <!--name-->
+<form novalidate #a="ngForm" (ngSubmit)="onSend(a)">
+  <div class="form-group">
+  <label>Username</label>
+    <input type="text" class="form-control" 
+    [(ngModel)] = "user.name"
+    name ="name"
+    #userName="ngModel"
+    minlength="2"
+    required
+    >
+  <div *ngIf="userName.errors?.required &&
+    userName.touched" class="alert alert-danger">
+    Please Enter Your Name
+  </div>
+  <div *ngIf="userName.errors?.minlength &&
+    userName.touched" class="alert alert-danger">
+    Name must be at least 2 characters
+  </div>
+<!--email-->
+<div class="form-group">
+<label>Email address</label>
+    <input type="text" class="form-control" 
+    [(ngModel)] = "user.email"
+    name="email"
+    #userEmail="ngModel"
+    required
+    >
+    <div *ngIf="userEmail.errors?.required &&
+    userEmail.touched" class="alert alert-danger">
+    Email is Required
+  </div>
+  </div>
+  <!--password-->
+  <div class="form-group">
+  <label>Password</label>
+    <input type="password" class="form-control"
+    [(ngModel)] = "user.password"
+    name="password"
+    #userPassword="ngModel" 
+    minlength="8"
+    required
+    >
+
+    <div *ngIf="userPassword.errors?.required &&
+    userPassword.touched" class="alert alert-danger">
+    Password is Required.
+    </div>
+    <div *ngIf="userPassword.errors?.minlength &&
+    userPassword.touched" class="alert alert-danger">
+    Password must be at least 8 characters
+  </div>
+
+  </div>
+<small id="passwordHelpBlock" class="form-text text-muted">
+  Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+</small>
+
+<div class="form-check">
+  <input class="form-check-input is-invalid" type="checkbox" required>
+  <label class="form-check-label" for="invalidCheck3">
+    Agree to terms and conditions
+  </label>
+
+  <div class="invalid-feedback">
+    You must agree before submitting.
+  </div>
+</div>
+  <!--submit-->>
+  <input type="submit" class="btn btn-success" value="Submit">
+</div>>
+</form>
+
+
+

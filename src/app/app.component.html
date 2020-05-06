@@ -1,0 +1,27 @@
+<div>
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a href="#" class="navbar-brand">bezKoder</a>
+    <div class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a routerLink="tutorials" class="nav-link">Tutorials</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="add" class="nav-link">Add</a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="home" class="nav-link">Home</a>
+      </li>
+       
+      <button class="nav-item" type="button" routerLink="signin" class="btn btn-success">Sign in</button> 
+      <br>
+      <button class="nav-item" type="button" routerLink="signup" class="btn btn-success">Sign up</button>
+      
+
+
+    </div>
+  </nav>
+
+  <div class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+</div>
