@@ -7,22 +7,25 @@ exports.create = (req, res) => {
   if (!req.body.title) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
-  }
+    }
 
   // Create a Tutorial
+  const url = req.protocol + "://" + req.get("host");
   const tutorial = new Tutorial({
     title: req.body.title,
     description: req.body.description,
     name:  req.body.name,
     published: req.body.published ? req.body.published : false,
-    img:  req.body.img,
+    img:  url + "/images/" + req.file.filename
   });
 
   // Save Tutorial in the database
   tutorial
     .save(tutorial)
     .then(data => {
-      res.send(data);
+      res.send(data),
+      res.status(201).json({
+        message: "Note added successfully"
     })
     .catch(err => {
       res.status(500).send({
@@ -30,8 +33,8 @@ exports.create = (req, res) => {
           err.message || "Some error occurred while creating the Tutorial."
       });
     });
-};
-
+});
+}
 // Retrieve all Tutorials from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
@@ -142,4 +145,5 @@ exports.findAllPublished = (req, res) => {
           err.message || "Some error occurred while retrieving tutorials."
       });
     });
+
 };

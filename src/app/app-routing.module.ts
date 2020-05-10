@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { TutorialsListComponent } from './components/tutorials-list/tutorials-list.component';
-import { TutorialDetailsComponent } from './components/tutorial-details/tutorial-details.component';
-import { AddTutorialComponent } from './components/add-tutorial/add-tutorial.component';
+import { TutorialsListComponent } from './components/tutorials/tutorials-list/tutorials-list.component';
+import { TutorialDetailsComponent } from './components/tutorials/tutorial-details/tutorial-details.component';
+import { AddTutorialComponent } from './components/tutorials/add-tutorial/add-tutorial.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 
 const routes: Routes = [

@@ -42,17 +42,17 @@ export class TutorialsListComponent implements OnInit {
     this.currentIndex = index;
   }
 
-  removeAllTutorials() {
-    this.tutorialService.deleteAll()
-      .subscribe(
-        response => {
-          console.log(response);
-          this.retrieveTutorials();
-        },
-        error => {
-          console.log(error);
-        });
-  }
+  // removeAllTutorials() {
+  //   this.tutorialService.deleteAll()
+  //     .subscribe(
+  //       response => {
+  //         console.log(response);
+  //         this.retrieveTutorials();
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       });
+  // }
 
   searchTitle() {
     this.tutorialService.findByTitle(this.title)

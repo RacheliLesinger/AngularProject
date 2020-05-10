@@ -1,40 +1,138 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Subject } from "rxjs";
+import { map } from "rxjs/operators";
+import { Router } from "@angular/router";
+
+import { Tutorial } from "src/app/models/tutorial.model";
 
 const baseUrl = 'http://localhost:8080/api/tutorials';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: "root" })
 export class TutorialService {
+  private tutorials: Tutorial[] = [];
+  private tutorialsUpdated = new Subject<{ tutorials: Tutorial[]; tutorialCount: number }>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   getAll() {
     return this.http.get(baseUrl);
   }
-
-  get(id) {
-    return this.http.get(`${baseUrl}/${id}`);
+  getTutorialUpdateListener() {
+    return this.tutorialsUpdated.asObservable();
   }
 
-  create(data) {
-    return this.http.post(baseUrl, data);
+  getTutorial(id: string) {
+    return this.http.get<{
+      _id: string;
+      title: string;
+      description: string;
+      img: string;
+    }>(baseUrl + id);
   }
 
-  update(id, data) {
-    return this.http.put(`${baseUrl}/${id}`, data);
+  addTutorial(title: string, description: string, img: File) {
+    const tutorialData = new FormData();
+    tutorialData.append("title", title);
+    tutorialData.append("description", description);
+    tutorialData.append("img", img, title);
+    this.http
+      .post<{ message: string; tutorial: Tutorial }>(
+        baseUrl,
+        tutorialData
+      )
+      .subscribe(responseData => {
+        this.router.navigate(["/"]);
+      });
   }
 
-  delete(id) {
-    return this.http.delete(`${baseUrl}/${id}`);
+  updateTutorial(id: string, title: string, description: string, img: File | string) {
+    let tutorialData: Tutorial | FormData;
+    if (typeof img === "object") {
+      tutorialData = new FormData();
+      tutorialData.append("id", id);
+      tutorialData.append("title", title);
+      tutorialData.append("description", description);
+      tutorialData.append("img", img, title);
+    } else {
+      tutorialData = {
+        id: id,
+        title: title,
+        description: description,
+        name: "",
+        img: img
+      };
+    }
+    this.http
+      .put(baseUrl + id, tutorialData)
+      .subscribe(response => {
+        this.router.navigate(["/"]);
+      });
   }
 
-  deleteAll() {
-    return this.http.delete(baseUrl);
+  deleteTutorial(tutorialId: string) {
+    return this.http
+      .delete(baseUrl + tutorialId);
   }
 
   findByTitle(title) {
-    return this.http.get(`${baseUrl}?title=${title}`);
-  }
+        return this.http.get(`${baseUrl}?title=${title}`);
+      }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Injectable } from '@angular/core';
+// import { HttpClient } from '@angular/common/http';
+
+// const baseUrl = 'http://localhost:8080/api/tutorials';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class TutorialService {
+
+//   constructor(private http: HttpClient) { }
+
+//   getAll() {
+//     return this.http.get(baseUrl);
+//   }
+
+//   get(id) {
+//     return this.http.get(`${baseUrl}/${id}`);
+//   }
+
+//   create(data) {
+//     return this.http.post(baseUrl, data);
+//   }
+
+//   update(id, data) {
+//     return this.http.put(`${baseUrl}/${id}`, data);
+//   }
+
+//   delete(id) {
+//     return this.http.delete(`${baseUrl}/${id}`);
+//   }
+
+//   deleteAll() {
+//     return this.http.delete(baseUrl);
+//   }
+
+//   findByTitle(title) {
+//     return this.http.get(`${baseUrl}?title=${title}`);
+//   }
+// }

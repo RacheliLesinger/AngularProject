@@ -22,7 +22,7 @@ export class TutorialDetailsComponent implements OnInit {
   }
 
   getTutorial(id) {
-    this.tutorialService.get(id)
+    this.tutorialService.getTutorial(id)
       .subscribe(
         data => {
           this.currentTutorial = data;
@@ -33,38 +33,38 @@ export class TutorialDetailsComponent implements OnInit {
         });
   }
 
-  updatePublished(status) {
-    const data = {
-      title: this.currentTutorial.title,
-      description: this.currentTutorial.description,
-      published: status
-    };
+  // updatePublished(status) {
+  //   const data = {
+  //     title: this.currentTutorial.title,
+  //     description: this.currentTutorial.description,
+  //     img:this.currentTutorial.img
+  //   };
 
-    this.tutorialService.update(this.currentTutorial.id, data)
-      .subscribe(
-        response => {
-          this.currentTutorial.published = status;
-          console.log(response);
-        },
-        error => {
-          console.log(error);
-        });
-  }
+  //   this.tutorialService.updateTutorial(this.currentTutorial.id, data)
+  //     .subscribe(
+  //       response => {
+  //         this.currentTutorial.published = status;
+  //         console.log(response);
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       });
+  // }
 
   updateTutorial() {
-    this.tutorialService.update(this.currentTutorial.id, this.currentTutorial)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.message = 'The tutorial was updated successfully!';
-        },
-        error => {
-          console.log(error);
-        });
+    this.tutorialService.updateTutorial(this.currentTutorial.id, this.currentTutorial.title,this.currentTutorial.description,this.currentTutorial.img)
+      // .subscribe(
+      //   response => {
+      //     console.log(response);
+      //     this.message = 'The tutorial was updated successfully!';
+      //   },
+      //   error => {
+      //     console.log(error);
+      //   });
   }
 
   deleteTutorial() {
-    this.tutorialService.delete(this.currentTutorial.id)
+    this.tutorialService.deleteTutorial(this.currentTutorial.id)
       .subscribe(
         response => {
           console.log(response);
