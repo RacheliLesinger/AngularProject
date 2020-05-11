@@ -14,8 +14,6 @@ exports.create = (req, res) => {
   const tutorial = new Tutorial({
     title: req.body.title,
     description: req.body.description,
-    name:  req.body.name,
-    published: req.body.published ? req.body.published : false,
     img:  url + "/images/" + req.file.filename
   });
 
@@ -25,7 +23,7 @@ exports.create = (req, res) => {
     .then(data => {
       res.send(data),
       res.status(201).json({
-        message: "Note added successfully"
+        message: "Tutorial added successfully"
     })
     .catch(err => {
       res.status(500).send({
@@ -134,16 +132,16 @@ exports.deleteAll = (req, res) => {
 };
 
 // Find all published Tutorials
-exports.findAllPublished = (req, res) => {
-  Tutorial.find({ published: true })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
-      });
-    });
+// exports.findAllPublished = (req, res) => {
+//   Tutorial.find({ published: true })
+//     .then(data => {
+//       res.send(data);
+//     })
+//     .catch(err => {
+//       res.status(500).send({
+//         message:
+//           err.message || "Some error occurred while retrieving tutorials."
+//       });
+//     });
 
-};
+// };

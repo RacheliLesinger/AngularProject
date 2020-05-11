@@ -5,6 +5,7 @@ import { TutorialDetailsComponent } from './components/tutorials/tutorial-detail
 import { AddTutorialComponent } from './components/tutorials/add-tutorial/add-tutorial.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 
+
 const routes: Routes = [
   { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
   { path: 'tutorials', component: TutorialsListComponent },

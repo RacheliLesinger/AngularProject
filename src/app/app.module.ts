@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +16,20 @@ import { SigninComponent } from './components/signin/signin.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatInputModule, MatButtonModule, MatSelectModule, MatIconModule , MatListModule} from '@angular/material';
+import { 
+  MatInputModule, 
+  MatButtonModule, 
+  MatSelectModule, 
+  MatIconModule , 
+  MatListModule,
+  MatProgressSpinnerModule, 
+  MatCardModule,
+  MatToolbarModule,
+  MatExpansionModule,
+  
+  MatPaginatorModule} 
+  from '@angular/material';
+
 
 const appRoutes: Routes = [
   {path:'home',component:HomeComponent},
@@ -47,8 +60,13 @@ const appRoutes: Routes = [
     MatButtonModule,
     MatSelectModule,
     MatIconModule,
-    MatListModule
-  
+    MatProgressSpinnerModule,
+    MatListModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    ReactiveFormsModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
     if (isValid) {
       error = null;
     }
-    cb(error, "backend/images");
+    cb(error, "images");
   },
   filename: (req, file, cb) => {
     const name = file.originalname
@@ -31,13 +31,13 @@ module.exports = app => {
   var router = require("express").Router();
 
   // Create a new Tutorial
-  router.post("",multer({ storage: storage }).single("image"), tutorials.create);
+  router.post("",multer({ storage: storage }).single("img"), tutorials.create);
 
   // Retrieve all Tutorials
   router.get("/", tutorials.findAll);
 
   // Retrieve all published Tutorials
-  router.get("/published", tutorials.findAllPublished);
+  // router.get("/published", tutorials.findAllPublished);
 
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
