@@ -33,12 +33,12 @@ saveNewUser()
 {
   debugger;
   const data = {
-    firstname: this.user.first,
-    lastname: this.user.last,
+    first_name: this.user.first,
+    last_name: this.user.last,
     username: this.user.name,
     email: this.user.email,
     address: this.user.address,
-    faculty: this.user.faculty,
+    //faculty: this.user.faculty,
     password: this.user.password,
 
 
