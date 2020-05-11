@@ -9,8 +9,12 @@ import { UserService } from 'src/app/services/user.service';
 export class SignupComponent implements OnInit {
 users:any=[];
 user = {
+  first:'',
+  last:'',
   name:'',
   email:'',
+  address:'',
+  faculty:'',
   password:''
 };
 submitted = false;
@@ -29,12 +33,15 @@ saveNewUser()
 {
   debugger;
   const data = {
+    first_name: this.user.first,
+    last_name: this.user.last,
     username: this.user.name,
     email: this.user.email,
+    address: this.user.address,
+    //faculty: this.user.faculty,
     password: this.user.password,
 
-    first_name: "first name",
-    last_name: "last name",
+
     status:"student"
     //faculty:faculty
   };

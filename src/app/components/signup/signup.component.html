@@ -1,7 +1,46 @@
 <h1>Create your account </h1>
 
 <div class="container mt-4">
-  <!--name-->
+
+  <!--firstname-->
+<form novalidate #a="ngForm" (ngSubmit)="onSend(a)">
+  <div class="form-group">
+  <label>First Name</label>
+    <input type="text" class="form-control" 
+    [(ngModel)] = "user.first"
+    name ="first"
+    #userFirst="ngModel"
+    minlength="2"
+    required
+    >
+  <div *ngIf="userFirst.errors?.required &&
+  userFirst.touched" class="alert alert-danger">
+    Please Enter Your First Name
+  </div>
+  <div *ngIf="userFirst.errors?.minlength &&
+  userFirst.touched" class="alert alert-danger">
+  First Name must be at least 2 characters
+  </div>
+    <!--lastname-->
+<form novalidate #a="ngForm" (ngSubmit)="onSend(a)">
+  <div class="form-group">
+  <label>Last Name</label>
+    <input type="text" class="form-control" 
+    [(ngModel)] = "user.last"
+    name ="last"
+    #userLast="ngModel"
+    minlength="2"
+    required
+    >
+  <div *ngIf="userLast.errors?.required &&
+  userLast.touched" class="alert alert-danger">
+    Please Enter Your Last Name
+  </div>
+  <div *ngIf="userLast.errors?.minlength &&
+  userLast.touched" class="alert alert-danger">
+    Last Name must be at least 2 characters
+  </div>
+  <!--username-->
 <form novalidate #a="ngForm" (ngSubmit)="onSend(a)">
   <div class="form-group">
   <label>Username</label>
@@ -14,7 +53,7 @@
     >
   <div *ngIf="userName.errors?.required &&
     userName.touched" class="alert alert-danger">
-    Please Enter Your Name
+    Please Enter Your User Name
   </div>
   <div *ngIf="userName.errors?.minlength &&
     userName.touched" class="alert alert-danger">
@@ -34,6 +73,34 @@
     Email is Required
   </div>
   </div>
+  <!--address-->
+<div class="form-group">
+  <label>Address</label>
+      <input type="text" class="form-control" 
+      [(ngModel)] = "user.address"
+      name="address"
+      #userAddress="ngModel"
+      required
+      >
+      <div *ngIf="userAddress.errors?.required &&
+      userAddress.touched" class="alert alert-danger">
+      Address is Required
+    </div>
+    </div>
+      <!--faculty-->
+<div class="form-group">
+  <label>Faculty</label>
+      <input type="text" class="form-control" 
+      [(ngModel)] = "user.faculty"
+      name="faculty"
+      #userFaculty="ngModel"
+      required
+      >
+      <div *ngIf="userFaculty.errors?.required &&
+      userFaculty.touched" class="alert alert-danger">
+      Faculty is Required
+    </div>
+    </div>
   <!--password-->
   <div class="form-group">
   <label>Password</label>
