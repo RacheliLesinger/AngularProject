@@ -79,7 +79,7 @@ export class AddTutorialComponent implements OnInit {
     reader.readAsDataURL(file);
   }
 
-  onSaveNote() {
+  onSaveTutorial() {
     if (this.form.invalid) {
       return;
     }

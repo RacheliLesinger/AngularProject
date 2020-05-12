@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TutorialService } from 'src/app/services/tutorial.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.retrieveTutorials();
+
   }
 
   public get third(): number {
@@ -36,5 +38,8 @@ export class HomeComponent implements OnInit {
           console.log(error);
         });
   }
+
+
+  
 
 }

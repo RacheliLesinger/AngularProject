@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'users', component: UsersListComponent },
   { path: 'add', component: AddTutorialComponent }
+  
 ];
 
 @NgModule({
