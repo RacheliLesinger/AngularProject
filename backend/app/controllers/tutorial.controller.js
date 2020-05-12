@@ -14,7 +14,8 @@ exports.create = (req, res) => {
   const tutorial = new Tutorial({
     title: req.body.title,
     description: req.body.description,
-    img:  url + "/images/" + req.file.filename
+    img:  url + "/images/" + req.file.filename,
+    link: req.body.link
   });
 
   // Save Tutorial in the database

@@ -16,6 +16,10 @@
       <textarea matInput rows="4" formControlName="description" placeholder="Tutorial Content"></textarea>
       <mat-error *ngIf="form.get('description').invalid">Please enter a tutorial title.</mat-error>
     </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" formControlName="link" placeholder="Tutorial Link">
+      <mat-error *ngIf="form.get('link').invalid">Please enter a tutorial link.</mat-error>
+    </mat-form-field>
     <button mat-raised-button color="accent" type="submit">Save Tutorial</button>
   </form>
 </mat-card>

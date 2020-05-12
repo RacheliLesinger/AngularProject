@@ -52,7 +52,7 @@ export class TutorialDetailsComponent implements OnInit {
   // }
 
   updateTutorial() {
-    this.tutorialService.updateTutorial(this.currentTutorial.id, this.currentTutorial.title,this.currentTutorial.description,this.currentTutorial.img)
+    this.tutorialService.updateTutorial(this.currentTutorial.id, this.currentTutorial.title,this.currentTutorial.description,this.currentTutorial.img, this.currentTutorial.link)
       // .subscribe(
       //   response => {
       //     console.log(response);

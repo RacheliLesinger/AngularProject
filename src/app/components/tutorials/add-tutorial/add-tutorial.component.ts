@@ -13,8 +13,6 @@ import { mimeType } from "./mime-type.validator";
 })
 
 export class AddTutorialComponent implements OnInit {
-  enteredTitle = "";
-  enteredContent = "";
   tutorial: Tutorial;
   isLoading = false;
   form: FormGroup;
@@ -36,6 +34,9 @@ export class AddTutorialComponent implements OnInit {
       img: new FormControl(null, {
         validators: [Validators.required],
         asyncValidators: [mimeType]
+      }),
+      link:new FormControl(null, {
+        validators: [Validators.required, Validators.required]
       })
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
@@ -50,12 +51,14 @@ export class AddTutorialComponent implements OnInit {
             title: tutorialData.title,
             description: tutorialData.description,
             name: "",
-            img: tutorialData.img
+            img: tutorialData.img,
+            link:tutorialData.link
           };
           this.form.setValue({
             title: this.tutorial.title,
             description: this.tutorial.description,
-            img: this.tutorial.img
+            img: this.tutorial.img,
+            link: this.tutorial.link
           });
         });
       } else {
@@ -85,14 +88,16 @@ export class AddTutorialComponent implements OnInit {
       this.tutorialsService.addTutorial(
         this.form.value.title,
         this.form.value.description,
-        this.form.value.img
+        this.form.value.img,
+        this.form.value.link
       );
     } else {
       this.tutorialsService.updateTutorial(
         this.tutorialId,
         this.form.value.title,
         this.form.value.description,
-        this.form.value.img
+        this.form.value.img,
+        this.form.value.link
       );
     }
     this.form.reset();

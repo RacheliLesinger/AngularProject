@@ -28,14 +28,16 @@ export class TutorialService {
       title: string;
       description: string;
       img: string;
+      link: string;
     }>(baseUrl + id);
   }
 
-  addTutorial(title: string, description: string, img: File) {
+  addTutorial(title: string, description: string, img: File, link: string) {
     const tutorialData = new FormData();
     tutorialData.append("title", title);
     tutorialData.append("description", description);
     tutorialData.append("img", img, title);
+    tutorialData.append("link", link);
     this.http
       .post<{ message: string; tutorial: Tutorial }>(
         baseUrl,
@@ -46,7 +48,7 @@ export class TutorialService {
       });
   }
 
-  updateTutorial(id: string, title: string, description: string, img: File | string) {
+  updateTutorial(id: string, title: string, description: string, img: File | string, link: string) {
     let tutorialData: Tutorial | FormData;
     if (typeof img === "object") {
       tutorialData = new FormData();
@@ -54,13 +56,15 @@ export class TutorialService {
       tutorialData.append("title", title);
       tutorialData.append("description", description);
       tutorialData.append("img", img, title);
+      tutorialData.append("link", link);
     } else {
       tutorialData = {
         id: id,
         title: title,
         description: description,
         name: "",
-        img: img
+        img: img,
+        link:link
       };
     }
     this.http

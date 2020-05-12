@@ -3,5 +3,6 @@ export interface Tutorial {
     title: String,
     description: String,
     name: String,
-    img: String
+    img: String,
+    link: String
   }

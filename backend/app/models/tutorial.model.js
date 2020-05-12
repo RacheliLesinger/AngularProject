@@ -4,7 +4,8 @@ module.exports = mongoose => {
       title: String,
       description: String,
       name: String,
-      img: String
+      img: String,
+      link:String
     },
     { timestamps: true }
   );
