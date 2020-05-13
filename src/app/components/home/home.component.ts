@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TutorialService } from 'src/app/services/tutorial.service';
+import { User } from 'src/app/models/user.model';
+import { AuthonticationService } from 'src/app/services/authontication.service';
 
 
 @Component({
@@ -9,16 +11,19 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 })
 export class HomeComponent implements OnInit {
 
+  currentUser :User;
   tutorials: any;
   currentTutorial = null;
   currentIndex = -1;
   title = '';
-
-  constructor(private tutorialService: TutorialService) { }
+  
+  constructor(private tutorialService: TutorialService,
+              private authonticationService: AuthonticationService) { }
 
   ngOnInit() {
     this.retrieveTutorials();
-
+    this.currentUser = this.authonticationService.currentUserValue;
+    
   }
 
   public get third(): number {

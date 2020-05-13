@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { AuthonticationService } from 'src/app/services/authontication.service';
 
 @Component({
   selector: 'app-signup',
@@ -46,10 +47,12 @@ saveNewUser()
     //faculty:faculty
   };
 
+  
   this.userService.create(data)
     .subscribe(
       response => {
         console.log(response);
+        this.authonticationService.initUser(response);
         this.submitted = true;
       },
       error => {
@@ -57,7 +60,8 @@ saveNewUser()
       });
 }
 
- constructor(private userService: UserService) { }
+ constructor(private userService: UserService,
+  private authonticationService: AuthonticationService) { }
 
   ngOnInit() {
   }

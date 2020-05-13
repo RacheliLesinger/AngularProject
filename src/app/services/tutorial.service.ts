@@ -110,7 +110,7 @@ export class TutorialService {
 
   deleteTutorial(tutorialId: string) {
     return this.http
-      .delete(baseUrl + tutorialId);
+      .delete(baseUrl + "/" +tutorialId);
   }
 
   findByTitle(title) {
