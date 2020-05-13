@@ -5,6 +5,7 @@ import { PageEvent } from "@angular/material";
 import { Subscription } from "rxjs";
 
 import { Tutorial } from 'src/app/models/tutorial.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
   currentPage = 1;
   private tutorialsSub: Subscription;
 
-  constructor(private tutorialService: TutorialService) { }
+  constructor(private tutorialService: TutorialService,
+              private router: Router) { }
 
   ngOnInit() {
     this.isLoading = true;
@@ -31,7 +33,13 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
         this.isLoading = false;
         this.totalTutorials = tutorialData.tutorialCount;
         this.tutorials = tutorialData.tutorials;
+        console.log("tutorialData.tutorials: ", tutorialData.tutorials)
       });
+  }
+
+  openTutorialsDetails(tutorial)
+  {
+    this.router.navigate(['/tutorials/' + tutorial.id ]);
   }
 
   // retrieveTutorials() {

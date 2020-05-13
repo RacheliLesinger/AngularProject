@@ -27,13 +27,14 @@ export class TutorialService {
       )
       .pipe(
         map(tutorialData => {
+          console.log("!!!tutorialData.tutorials   :" , tutorialData.tutorials)
           return {
             tutorials: tutorialData.tutorials.map(tutorial => {
               return {
                
                 title: tutorial.title,
                 descriptionent: tutorial.description,
-                id: tutorial._id,
+                id: tutorial.id,
                 name:tutorial.name,
                 img: tutorial.img,
                 link:tutorial.link
@@ -62,7 +63,7 @@ export class TutorialService {
       description: string;
       img: string;
       link: string;
-    }>(baseUrl + id);
+    }>(baseUrl + "/" +id);
   }
 
   addTutorial(title: string, description: string, img: File, link: string) {

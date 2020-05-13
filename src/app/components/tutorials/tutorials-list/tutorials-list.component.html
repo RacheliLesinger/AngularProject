@@ -38,8 +38,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
   <!-- First Photo Grid -->
   <!--  *ngFor="let item of tutorials | slice:0:third" -->
   <div class="w3-row-padding">
-  <div *ngFor="let item of tutorials | slice:0:third">
-    <div class="w3-third w3-container w3-margin-bottom" style="  width:270px; height:250px;">
+  <div *ngFor="let item of tutorials | slice:0:third" >
+    <div class="w3-third w3-container w3-margin-bottom" style="  width:270px; height:250px;" (click)="openTutorialsDetails(item)">
      <div class=containter>
       <img [src]="item?.img"  alt="Norway" class="w3-hover-opacity" >
     </div>
