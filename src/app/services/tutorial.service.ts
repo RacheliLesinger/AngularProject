@@ -18,6 +18,39 @@ export class TutorialService {
   getAll() {
     return this.http.get(baseUrl);
   }
+
+  getTutorials(tutorialsPerPage: number, currentPage: number) {
+    const queryParams = `?pagesize=${tutorialsPerPage}&page=${currentPage}`;
+    this.http
+      .get<{ message: string; tutorials: any; maxTutorials: number }>(
+        baseUrl + queryParams
+      )
+      .pipe(
+        map(tutorialData => {
+          return {
+            tutorials: tutorialData.tutorials.map(tutorial => {
+              return {
+               
+                title: tutorial.title,
+                descriptionent: tutorial.description,
+                id: tutorial._id,
+                name:tutorial.name,
+                img: tutorial.img,
+                link:tutorial.link
+              };
+            }),
+            maxTutorials: tutorialData.maxTutorials
+          };
+        })
+      )
+      .subscribe(transformedTutorialData => {
+        this.tutorials = transformedTutorialData.tutorials;
+        this.tutorialsUpdated.next({
+          tutorials: [...this.tutorials],
+          tutorialCount: transformedTutorialData.maxTutorials
+        });
+      });
+  }
   getTutorialUpdateListener() {
     return this.tutorialsUpdated.asObservable();
   }

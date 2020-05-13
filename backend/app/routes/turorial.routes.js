@@ -1,6 +1,8 @@
 const multer = require("multer");
-
+const db = require("../models");
+const Tutorial = db.tutorials;
 const MIME_TYPE_MAP = {
+  
   "image/png": "png",
   "image/jpeg": "jpg",
   "image/jpg": "jpg"
@@ -34,7 +36,28 @@ module.exports = app => {
   router.post("",multer({ storage: storage }).single("img"), tutorials.create);
 
   // Retrieve all Tutorials
-  router.get("/", tutorials.findAll);
+  // router.get("/", tutorials.findAll);
+  router.get("/", (req, res, next) => {
+    const pageSize = +req.query.pagesize;
+    const currentPage = +req.query.page;
+    const tutorialQuery = Tutorial.find();
+    let fetchedTutorials;
+    if (pageSize && currentPage) {
+      tutorialQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+    }
+    tutorialQuery
+      .then(documents => {
+        fetchedTutorials = documents;
+        return Tutorial.count();
+      })
+      .then(count => {
+        res.status(200).json({
+          message: "Tutorials fetched successfully!",
+          tutorials: fetchedTutorials,
+          maxTutorials: count
+        });
+      });
+  });
 
   // Retrieve all published Tutorials
   // router.get("/published", tutorials.findAllPublished);

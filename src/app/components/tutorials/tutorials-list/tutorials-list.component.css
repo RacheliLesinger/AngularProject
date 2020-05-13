@@ -3,3 +3,19 @@
   max-width: 750px;
   margin: auto;
 }
+
+.containter{
+  position:relative;
+  overflow:hidden;
+  width:100%; 
+   height:75%;
+}
+
+.containter img{
+  position:absolute; 
+  top:0; 
+  bottom:0; 
+  margin: auto;
+  width:100%;
+
+}
