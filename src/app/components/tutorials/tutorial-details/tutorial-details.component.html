@@ -1,6 +1,11 @@
 <div *ngIf="currentTutorial" class="edit-form">
-  <h4>Tutorial</h4>
-  <form>
+
+  <form >
+    <br/>
+  <h1 >{{ currentTutorial?.title }}</h1>
+  <br/>
+    <img [src]="currentTutorial?.img"  alt="Norway" class="w3-hover-opacity" >
+    <br/>
     <div class="form-group">
       <label for="title">Title</label>
       <input
@@ -12,44 +17,47 @@
       />
     </div>
     <div class="form-group">
-      <label for="description">Description</label>
+      <label for="name">Lecturer</label>
       <input
         type="text"
+        class="form-control"
+        id="name"
+        [(ngModel)]="currentTutorial.name"
+        name="name"
+      />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea matInput rows="4"
         class="form-control"
         id="description"
         [(ngModel)]="currentTutorial.description"
         name="description"
+      ></textarea>
+    </div>
+    <div class="form-group">
+      <label for="link">Link</label>
+      <input
+        type="url"
+        class="form-control"
+        id="link"
+        [(ngModel)]="currentTutorial.link"
+        name="link"
       />
     </div>
 
-    <div class="form-group">
-      <label><strong>Status:</strong></label>
-      {{ currentTutorial.published ? "Published" : "Pending" }}
-    </div>
+  
   </form>
 
-  <button
-    class="badge badge-primary mr-2"
-    *ngIf="currentTutorial.published"
-    (click)="updatePublished(false)"
-  >
-    UnPublish
-  </button>
-  <button
-    *ngIf="!currentTutorial.published"
-    class="badge badge-primary mr-2"
-    (click)="updatePublished(true)"
-  >
-    Publish
-  </button>
 
-  <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
+  <button class="btn btn-secondary" (click)="deleteTutorial()">
     Delete
   </button>
-
-  <button type="submit" class="badge badge-success" (click)="updateTutorial()">
+  <span>  </span>
+  <button type="submit" class="btn btn-secondary" (click)="updateTutorial()">
     Update
   </button>
+
   <p>{{ message }}</p>
 </div>
 

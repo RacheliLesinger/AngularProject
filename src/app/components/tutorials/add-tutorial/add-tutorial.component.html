@@ -18,7 +18,7 @@
     </mat-form-field>
     <div>
     <mat-form-field>
-      <input matInput type="text" formControlName="link" placeholder="Tutorial Link">
+      <input matInput type="url" formControlName="link" placeholder="Tutorial Link">
       <mat-error *ngIf="form.get('link').invalid">Please enter a tutorial link.</mat-error>
     </mat-form-field>
   </div>
