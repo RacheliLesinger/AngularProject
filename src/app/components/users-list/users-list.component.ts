@@ -39,12 +39,12 @@ export class UsersListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setActiveTutorial(user, index) {
+  setActiveUser(user, index) {
     this.currentUser = user;
     this.currentIndex = index;
   }
 
-  removeAllTutorials() {
+  removeAllUsers() {
     this.userService.deleteAll()
       .subscribe(
         response => {

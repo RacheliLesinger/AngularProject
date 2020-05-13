@@ -30,6 +30,10 @@
         >
           {{ user.username }}
         </li>
+          <a class="badge badge-warning" href="/user-details/{{ currentUser.id }}">
+            View
+          </a>
+        
       </ul>
   
       <mat-list>
@@ -38,36 +42,50 @@
             <h3 matLine> {{user.first_name}}  {{user.last_name}}</h3>
             <p matLine>
                 <span> {{user.username}} </span>
-                <span class="demo-2"> -- {{user.password}} </span>
+               <!-- <span class="demo-2"> -- {{user.password}} </span>  -->
             </p>
         </mat-list-item>
       </mat-list>
 
-      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllTutorials()">
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
         Remove All
       </button>
+
     </div>
     <div class="col-md-6">
-      <div *ngIf="currentTutorial">
-        <h4>Tutorial</h4>
+      <div *ngIf="currentUser">
+        <h4>User Details:</h4>
         <div>
-          <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+          <label><strong>First Name:</strong></label> {{ currentUser.first_name }}
         </div>
         <div>
-          <label><strong>Description:</strong></label>
-          {{ currentTutorial.description }}
+          <label><strong>Last Name:</strong></label>  {{ currentUser.last_name }}
+        </div>
+        <div>
+          <label><strong>User Name:</strong></label> {{ currentUser.username }}
+        </div>
+        <div>
+          <label><strong>Email:</strong></label> {{ currentUser.email }}    
+        </div>
+        <div>
+          <label><strong>Address:</strong></label> {{ currentUser.address }}
+        </div>
+        <div>
+          <label><strong>Faculty:</strong></label> {{ currentUser.faculty }}
         </div>
         <div>
           <label><strong>Status:</strong></label>
-          {{ currentTutorial.published ? "Published" : "Pending" }}
+          {{ currentUser.published ? "Published" : "student" }}
         </div>
+
+      
   
-        <a class="badge badge-warning" href="/tutorials/{{ currentTutorial.id }}">
-          Edit
+        <a class="badge badge-warning" href="/user-details/{{ currentUser.id }}">
+         View
         </a>
       </div>
   
-      <div *ngIf="!currentTutorial">
+      <div *ngIf="!currentUser">
         <br />
         <!-- <p>Please click on a Tutorial...</p> -->
       </div>
