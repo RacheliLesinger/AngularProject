@@ -48,7 +48,8 @@ const appRoutes: Routes = [
     HomeComponent,
     SigninComponent,
     SignupComponent,
-    UsersListComponent
+    UsersListComponent,
+    UserDetailsComponent
   ],
   imports: [
     BrowserModule,

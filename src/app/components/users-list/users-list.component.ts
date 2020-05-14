@@ -26,7 +26,8 @@ export class UsersListComponent implements OnInit {
 
 openUserDetails(user)
 {
-  this.router.navigate(['/user-details' + this.currentUser ]);
+  this.currentUser = user;
+  this.router.navigate(['/users/' + this.currentUser.id ]);
   
 }
 

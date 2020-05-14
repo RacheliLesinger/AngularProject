@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'tutorials', component: TutorialsListComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'users', component: UsersListComponent },
-
+  { path: 'users/:id', component: UserDetailsComponent },
   { path: 'add', component: AddTutorialComponent }
   
 ];

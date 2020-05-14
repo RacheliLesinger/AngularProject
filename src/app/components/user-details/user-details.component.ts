@@ -18,7 +18,7 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.message = '';
-    this.getUser(this.route.snapshot.paramMap.get('user'));
+    this.getUser(this.route.snapshot.paramMap.get('id'));
   }
 
   getUser(user) {
