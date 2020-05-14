@@ -4,6 +4,8 @@ import { TutorialsListComponent } from './components/tutorials/tutorials-list/tu
 import { TutorialDetailsComponent } from './components/tutorials/tutorial-details/tutorial-details.component';
 import { AddTutorialComponent } from './components/tutorials/add-tutorial/add-tutorial.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 const routes: Routes = [
@@ -11,6 +13,7 @@ const routes: Routes = [
   { path: 'tutorials', component: TutorialsListComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'users', component: UsersListComponent },
+  { path: 'users/:id', component: UserDetailsComponent },
   { path: 'add', component: AddTutorialComponent }
   
 ];
@@ -18,5 +21,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
+  
 })
 export class AppRoutingModule { }

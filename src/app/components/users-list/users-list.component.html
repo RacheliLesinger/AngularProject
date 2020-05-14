@@ -30,9 +30,15 @@
         >
           {{ user.username }}
         </li>
-          <a class="badge badge-warning" href="/user-details/{{ currentUser.id }}">
+          
+           
+            <button
+            class="badge badge-warning"
+            type="button"
+            (click)="openUserDetails(user)"
+          >
             View
-          </a>
+          </button>
         
       </ul>
   

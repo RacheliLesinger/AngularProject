@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 
 
 @Component({
@@ -15,11 +17,18 @@ export class UsersListComponent implements OnInit {
   currentIndex = -1;
   title = '';
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private router: Router) { }
 
   ngOnInit() {
     this.retrieveUsers();
   }
+
+openUserDetails(user)
+{
+  this.router.navigate(['/user-details' + this.currentUser ]);
+  
+}
 
   retrieveUsers() {
     this.userService.getAll()
