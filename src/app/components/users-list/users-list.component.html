@@ -67,7 +67,7 @@
           {{ user.username }}
  
             <button
-            class="badge badge-warning"
+            class="badge badge-warning"  
             type="button"
             (click)="openUserDetails(user)"
           >
@@ -77,23 +77,23 @@
         
       </ul>
   
-      <mat-list>
+    <!--   <mat-list>
         <mat-list-item *ngFor="let user of users">
             <img matListAvatar src="https://material.angular.io/assets/img/examples/shiba1.jpg" alt="Photo of a Shiba Inu">
             <h3 matLine> {{user.first_name}}  {{user.last_name}}</h3>
             <p matLine>
                 <span> {{user.username}} </span>
-               <!-- <span class="demo-2"> -- {{user.password}} </span>  -->
+ 
             </p>
         </mat-list-item>
-      </mat-list>
+      </mat-list> -->
 
       <button class="m-3 btn btn-sm btn-danger" (click)="removeAllUsers()">
         Remove All
       </button>
 
     </div>
-    <div class="col-md-6">
+   <!--  <div class="col-md-6">
       <div *ngIf="currentUser">
         <h4>User Details:</h4>
         <div>
@@ -128,8 +128,8 @@
   
       <div *ngIf="!currentUser">
         <br />
-        <!-- <p>Please click on a Tutorial...</p> -->
+       
       </div>
-    </div>
+    </div> -->
   </div>
   
