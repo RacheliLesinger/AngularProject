@@ -1,6 +1,12 @@
 .edit-form {
   margin: auto;
 }
+iframe{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
 .w3-hover-opacity{
 opacity: 0.8;
 width: 100%;
@@ -15,5 +21,12 @@ h1{
   font-family:"Raleway", cursive, sans-serif;
   font-weight: bold;
   text-align: center;
+}
+
+span{
+  font-family:"Raleway", sans-serif;
+  font-weight: bold;
+  text-align: center;
+
 }
 .btn { margin: 20px; }

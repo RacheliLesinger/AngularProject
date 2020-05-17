@@ -1,11 +1,12 @@
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
-      title: String,
-      description: String,
-      name: String,
-      img: String,
-      link:String
+      title: { type: String, required: true },
+      description: { type: String, required: true },
+      name: {  type: mongoose.Schema.Types.ObjectId, 
+        ref: 'User'  },
+      img: { type: String, required: true },
+      link:{ type: String, required: true },
     },
     { timestamps: true }
   );

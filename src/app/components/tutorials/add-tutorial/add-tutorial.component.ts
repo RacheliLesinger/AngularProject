@@ -4,6 +4,8 @@ import { ActivatedRoute, ParamMap } from "@angular/router";
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { Tutorial } from 'src/app/models/tutorial.model';
 import { mimeType } from "./mime-type.validator";
+import { AuthonticationService } from 'src/app/services/authontication.service';
+import { User } from 'src/app/models/user.model';
 
 
 @Component({
@@ -13,19 +15,24 @@ import { mimeType } from "./mime-type.validator";
 })
 
 export class AddTutorialComponent implements OnInit {
+
   tutorial: Tutorial;
   isLoading = false;
   form: FormGroup;
   imagePreview: string;
   private mode = "create";
   private tutorialId: string;
+  currentUser :User;
+  
 
   constructor(
     public tutorialsService: TutorialService,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private authonticationService: AuthonticationService
   ) {}
 
   ngOnInit() {
+    this.currentUser = this.authonticationService.currentUserValue;
     this.form = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]
@@ -36,8 +43,9 @@ export class AddTutorialComponent implements OnInit {
         asyncValidators: [mimeType]
       }),
       link:new FormControl(null, {
-        validators: [Validators.required, Validators.required]
+        validators: [ Validators.required]
       })
+  
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("tutorialId")) {
@@ -50,7 +58,7 @@ export class AddTutorialComponent implements OnInit {
             id: tutorialData._id,
             title: tutorialData.title,
             description: tutorialData.description,
-            name: "",
+            name: this.currentUser.id,
             img: tutorialData.img,
             link:tutorialData.link
           };
@@ -85,11 +93,15 @@ export class AddTutorialComponent implements OnInit {
     }
     this.isLoading = true;
     if (this.mode === "create") {
+      console.log(this.currentUser)
+      console.log(typeof(this.currentUser.id))
       this.tutorialsService.addTutorial(
         this.form.value.title,
         this.form.value.description,
         this.form.value.img,
-        this.form.value.link
+        this.form.value.link,
+        this.currentUser.id
+
       );
     } else {
       this.tutorialsService.updateTutorial(

@@ -1,9 +1,15 @@
 <div *ngIf="currentTutorial" class="edit-form">
-
+ 
   <form >
     <br/>
   <h1 >{{ currentTutorial?.title }}</h1>
   <br/>
+  <div *ngIf="currentUser" >
+    <span>Published BY:: </span>
+     <span>{{currentUser.first_name}} </span>
+     <span>{{currentUser.last_name}}</span>
+   </div>
+  
     <img [src]="currentTutorial?.img"  alt="Norway" class="w3-hover-opacity" >
     <br/>
     <div class="form-group">
@@ -16,16 +22,7 @@
         name="title"
       />
     </div>
-    <div class="form-group">
-      <label for="name">Lecturer</label>
-      <input
-        type="text"
-        class="form-control"
-        id="name"
-        [(ngModel)]="currentTutorial.name"
-        name="name"
-      />
-    </div>
+
     <div class="form-group">
       <label for="description">Description</label>
       <textarea matInput rows="4"

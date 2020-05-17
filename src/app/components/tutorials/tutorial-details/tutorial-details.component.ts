@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import{UserService} from "src/app/services/user.service"
 
 @Component({
   selector: 'app-tutorial-details',
@@ -9,16 +10,19 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TutorialDetailsComponent implements OnInit {
   currentTutorial = null;
+  currentUser=null;
   message = '';
 
   constructor(
     private tutorialService: TutorialService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
     this.message = '';
     this.getTutorial(this.route.snapshot.paramMap.get('id'));
+    
   }
 
   getTutorial(id) {
@@ -26,6 +30,14 @@ export class TutorialDetailsComponent implements OnInit {
       .subscribe(
         data => {
           this.currentTutorial = data;
+        
+          this.userService.get(this.currentTutorial.name).subscribe( data =>{
+            this.currentUser=data;
+            console.log(data);
+          },  error => {
+            console.log(error);
+          });
+
           console.log(data);
         },
         error => {

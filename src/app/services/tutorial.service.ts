@@ -5,6 +5,7 @@ import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
 
 import { Tutorial } from "src/app/models/tutorial.model";
+import { User } from '../models/user.model';
 
 const baseUrl = 'http://localhost:8080/api/tutorials';
 
@@ -63,15 +64,17 @@ export class TutorialService {
       description: string;
       img: string;
       link: string;
+      name: User;
     }>(baseUrl + "/" +id);
   }
 
-  addTutorial(title: string, description: string, img: File, link: string) {
+  addTutorial(title: string, description: string, img: File, link: string ,name:string) {
     const tutorialData = new FormData();
     tutorialData.append("title", title);
     tutorialData.append("description", description);
     tutorialData.append("img", img, title);
     tutorialData.append("link", link);
+    tutorialData.append("name", name);
     this.http
       .post<{ message: string; tutorial: Tutorial }>(
         baseUrl,
@@ -115,6 +118,9 @@ export class TutorialService {
 
   findByTitle(title) {
         return this.http.get(`${baseUrl}?title=${title}`);
+      }
+  findByLecturer(name) {
+        return this.http.get(`${baseUrl}?name=${name}`);
       }
 }
 

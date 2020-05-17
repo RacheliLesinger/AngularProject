@@ -1,5 +1,7 @@
 const db = require("../models");
 const Tutorial = db.tutorials;
+var mongoose = require('mongoose');
+
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
@@ -10,12 +12,14 @@ exports.create = (req, res) => {
     }
 
   // Create a Tutorial
+
   const url = req.protocol + "://" + req.get("host");
   const tutorial = new Tutorial({
     title: req.body.title,
     description: req.body.description,
     img:  url + "/images/" + req.file.filename,
-    link: req.body.link
+    link: req.body.link,
+    name: mongoose.Types.ObjectId(req.body.name)
   });
 
   // Save Tutorial in the database
