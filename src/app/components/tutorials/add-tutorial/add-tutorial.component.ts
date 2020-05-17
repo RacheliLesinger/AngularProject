@@ -6,6 +6,8 @@ import { Tutorial } from 'src/app/models/tutorial.model';
 import { mimeType } from "./mime-type.validator";
 import { AuthonticationService } from 'src/app/services/authontication.service';
 import { User } from 'src/app/models/user.model';
+import { FacultyService } from 'src/app/services/faculty.service';
+import { Faculty } from 'src/app/models/faculty.model';
 
 
 @Component({
@@ -23,15 +25,21 @@ export class AddTutorialComponent implements OnInit {
   private mode = "create";
   private tutorialId: string;
   currentUser :User;
+  facultiesList:Faculty[] = [];
   
 
   constructor(
     public tutorialsService: TutorialService,
+    public facultysService:FacultyService,
     public route: ActivatedRoute,
     private authonticationService: AuthonticationService
   ) {}
 
   ngOnInit() {
+    this.facultysService.getAll().subscribe((facultiesData: []) => {
+      this.facultiesList = facultiesData;
+      console.log(this.facultiesList);
+  });
     this.currentUser = this.authonticationService.currentUserValue;
     this.form = new FormGroup({
       title: new FormControl(null, {
@@ -44,8 +52,10 @@ export class AddTutorialComponent implements OnInit {
       }),
       link:new FormControl(null, {
         validators: [ Validators.required]
+      }),
+      faculty:new FormControl(null, {
+        validators: [ Validators.required]
       })
-  
     });
     this.route.paramMap.subscribe((paramMap: ParamMap) => {
       if (paramMap.has("tutorialId")) {
@@ -60,13 +70,15 @@ export class AddTutorialComponent implements OnInit {
             description: tutorialData.description,
             name: this.currentUser.id,
             img: tutorialData.img,
-            link:tutorialData.link
+            link:tutorialData.link,
+            faculty:tutorialData.faculty.id
           };
           this.form.setValue({
             title: this.tutorial.title,
             description: this.tutorial.description,
             img: this.tutorial.img,
-            link: this.tutorial.link
+            link: this.tutorial.link,
+            faculty:this.tutorial.faculty
           });
         });
       } else {
@@ -93,10 +105,12 @@ export class AddTutorialComponent implements OnInit {
     }
     this.isLoading = true;
     if (this.mode === "create") {
+ 
       console.log(this.currentUser)
-      console.log(typeof(this.currentUser.id))
+      console.log(  this.form.value.faculty,)
       this.tutorialsService.addTutorial(
         this.form.value.title,
+        this.form.value.faculty,
         this.form.value.description,
         this.form.value.img,
         this.form.value.link,
@@ -107,6 +121,7 @@ export class AddTutorialComponent implements OnInit {
       this.tutorialsService.updateTutorial(
         this.tutorialId,
         this.form.value.title,
+        this.form.value.faculty,
         this.form.value.description,
         this.form.value.img,
         this.form.value.link

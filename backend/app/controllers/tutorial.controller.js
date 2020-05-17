@@ -19,8 +19,10 @@ exports.create = (req, res) => {
     description: req.body.description,
     img:  url + "/images/" + req.file.filename,
     link: req.body.link,
+    faculty:mongoose.Types.ObjectId(req.body.faculty),
     name: mongoose.Types.ObjectId(req.body.name)
   });
+  console.log(tutorial.faculty)
 
   // Save Tutorial in the database
   tutorial

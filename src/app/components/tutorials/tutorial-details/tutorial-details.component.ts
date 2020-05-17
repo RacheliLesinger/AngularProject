@@ -11,6 +11,7 @@ import{UserService} from "src/app/services/user.service"
 export class TutorialDetailsComponent implements OnInit {
   currentTutorial = null;
   currentUser=null;
+  currentFaculty=null;
   message = '';
 
   constructor(
@@ -64,7 +65,7 @@ export class TutorialDetailsComponent implements OnInit {
   // }
 
   updateTutorial() {
-    this.tutorialService.updateTutorial(this.currentTutorial.id, this.currentTutorial.title,this.currentTutorial.description,this.currentTutorial.img, this.currentTutorial.link)
+    this.tutorialService.updateTutorial(this.currentTutorial.id, this.currentTutorial.title, this.currentTutorial.faculty,this.currentTutorial.description,this.currentTutorial.img, this.currentTutorial.link)
       // .subscribe(
       //   response => {
       //     console.log(response);

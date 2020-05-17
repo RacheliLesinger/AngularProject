@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 
 import { Tutorial } from "src/app/models/tutorial.model";
 import { User } from '../models/user.model';
+import { Faculty } from '../models/faculty.model';
 
 const baseUrl = 'http://localhost:8080/api/tutorials';
 
@@ -38,7 +39,8 @@ export class TutorialService {
                 id: tutorial.id,
                 name:tutorial.name,
                 img: tutorial.img,
-                link:tutorial.link
+                link:tutorial.link,
+                faculty:tutorial.faculty
               };
             }),
             maxTutorials: tutorialData.maxTutorials
@@ -65,16 +67,18 @@ export class TutorialService {
       img: string;
       link: string;
       name: User;
+      faculty:Faculty;
     }>(baseUrl + "/" +id);
   }
 
-  addTutorial(title: string, description: string, img: File, link: string ,name:string) {
+  addTutorial(title: string,faculty:string, description: string, img: File, link: string ,name:string) {
     const tutorialData = new FormData();
     tutorialData.append("title", title);
     tutorialData.append("description", description);
     tutorialData.append("img", img, title);
     tutorialData.append("link", link);
     tutorialData.append("name", name);
+    tutorialData.append("faculty", faculty);
     this.http
       .post<{ message: string; tutorial: Tutorial }>(
         baseUrl,
@@ -85,7 +89,7 @@ export class TutorialService {
       });
   }
 
-  updateTutorial(id: string, title: string, description: string, img: File | string, link: string) {
+  updateTutorial(id: string, title: string,faculty:string, description: string, img: File | string, link: string) {
     let tutorialData: Tutorial | FormData;
     if (typeof img === "object") {
       tutorialData = new FormData();
@@ -94,6 +98,7 @@ export class TutorialService {
       tutorialData.append("description", description);
       tutorialData.append("img", img, title);
       tutorialData.append("link", link);
+      tutorialData.append("faculty", faculty);
     } else {
       tutorialData = {
         id: id,
@@ -101,7 +106,8 @@ export class TutorialService {
         description: description,
         name: "",
         img: img,
-        link:link
+        link:link,
+        faculty:faculty
       };
     }
     this.http

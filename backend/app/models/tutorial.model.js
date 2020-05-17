@@ -5,6 +5,9 @@ module.exports = mongoose => {
       description: { type: String, required: true },
       name: {  type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'  },
+      faculty: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Faculty' },
       img: { type: String, required: true },
       link:{ type: String, required: true },
     },

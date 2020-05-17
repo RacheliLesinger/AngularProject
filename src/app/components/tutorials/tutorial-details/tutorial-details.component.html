@@ -5,9 +5,13 @@
   <h1 >{{ currentTutorial?.title }}</h1>
   <br/>
   <div *ngIf="currentUser" >
-    <span>Published BY:: </span>
+    <span>Published BY: </span>
      <span>{{currentUser.first_name}} </span>
      <span>{{currentUser.last_name}}</span>
+   </div>
+   <div >
+    <span>Faculty: </span>
+     <span>{{currentTutorial.faculty}} </span>
    </div>
   
     <img [src]="currentTutorial?.img"  alt="Norway" class="w3-hover-opacity" >

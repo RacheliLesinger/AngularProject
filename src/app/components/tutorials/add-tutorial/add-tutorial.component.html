@@ -1,10 +1,22 @@
 <mat-card>
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (submit)="onSaveTutorial()" *ngIf="!isLoading">
+    <div>
+    <mat-form-field>
+      <mat-label>Choose an option</mat-label>
+      <mat-select matInput  formControlName="faculty" >
+        <mat-option  *ngFor="let faculty of facultiesList| slice:0:third " [value]=faculty.id>{{faculty.facultyName}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('faculty').invalid">Please enter a tutorial faculty.</mat-error>
+    </mat-form-field>
+  </div>
+  <div>
     <mat-form-field>
       <input matInput type="text" formControlName="title" placeholder="Tutorial Title">
       <mat-error *ngIf="form.get('title').invalid">Please enter a tutorial title.</mat-error>
     </mat-form-field>
+  </div>
+    
     <div>
       <button mat-stroked-button type="button" (click)="filePicker.click()">Pick Image</button>
       <input type="file" #filePicker (change)="onImagePicked($event)">

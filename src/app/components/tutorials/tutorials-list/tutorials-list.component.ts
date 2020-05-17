@@ -5,8 +5,9 @@ import { PageEvent } from "@angular/material";
 import { Subscription } from "rxjs";
 
 import { Tutorial } from 'src/app/models/tutorial.model';
+
 import { Router } from '@angular/router';
-import { FacultyService } from 'src/app/services/faculty.service';
+
 
 
 @Component({
@@ -20,16 +21,15 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
   totalTutorials = 0;
   tutorialsPerPage = 9;
   currentPage = 1;
-  facultiesList: any;
+
   private tutorialsSub: Subscription;
 
   constructor(private tutorialService: TutorialService,
-              private router: Router,
-              private facultyService: FacultyService) { }
+              private router: Router
+            ) { }
 
   ngOnInit() {
-    this.facultiesList = this.facultyService.getAll().subscribe();
-    console.log("faculty", this.facultiesList);
+ 
     this.isLoading = true;
     this.tutorialService.getTutorials(this.tutorialsPerPage, this.currentPage);
     this.tutorialsSub = this.tutorialService

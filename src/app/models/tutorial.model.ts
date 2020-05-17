@@ -4,5 +4,6 @@ export interface Tutorial {
     description: String,
     name: String,
     img: String,
-    link: String
+    link: String,
+    faculty:String
   }
