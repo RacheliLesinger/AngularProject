@@ -33,7 +33,20 @@ export class UserService {
     return this.http.delete(baseUrl);
   }
 
-  findByTitle(title) {
-    return this.http.get(`${baseUrl}?title=${title}`);
+  findByUserName(name) {
+    return this.http.get(`${baseUrl}?username=${name}`);
+  }
+
+  findByParams(status, name, faculty)
+  {
+    return this.http.get(`${baseUrl}?status=${status}&username=${name}&faculty=${faculty}`);
+  }
+
+  findByStatus(status) {
+    return this.http.get(`${baseUrl}?status=${status}`);
+  }
+
+  findByFaculty(faculty) {
+    return this.http.get(`${baseUrl}?faculty=${faculty}`);
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { FacultyService } from 'src/app/services/faculty.service';
 
 
 @Component({
@@ -13,15 +14,20 @@ export class UsersListComponent implements OnInit {
 
 
   users: any;
+  faculties: any;
   currentUser = null;
   currentIndex = -1;
-  title = '';
+  name = '';
+  status = '';
+  faculty: '';
 
   constructor(private userService: UserService,
+    private facultyService: FacultyService,
     private router: Router) { }
 
   ngOnInit() {
     this.retrieveUsers();
+    this.retrieveFaculties();
   }
 
 openUserDetails(user)
@@ -36,6 +42,18 @@ openUserDetails(user)
       .subscribe(
         data => {
           this.users = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  retrieveFaculties() {
+    this.facultyService.getAll()
+      .subscribe(
+        data => {
+          this.faculties = data;
           console.log(data);
         },
         error => {
@@ -66,8 +84,20 @@ openUserDetails(user)
         });
   }
 
-  searchTitle() {
-    this.userService.findByTitle(this.title)
+  searchName() {
+    this.userService.findByUserName(this.name)
+      .subscribe(
+        data => {
+          this.users = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  search() {
+    this.userService.findByParams(this.status, this.name, this.faculty)
       .subscribe(
         data => {
           this.users = data;

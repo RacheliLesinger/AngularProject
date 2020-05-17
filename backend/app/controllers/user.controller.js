@@ -38,7 +38,15 @@ exports.create = (req, res) => {
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
   const username = req.query.username;
-  var condition = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
+  const status = req.query.status;
+  //var condition = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
+  //condition = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
+
+  var conditionName = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
+  var conditionStatus = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
+  var conditionfaculty = faculty ? { faculty: { $regex: new RegExp(faculty), $options: "i" } } : {};
+ 
+var condition =  { $and: [ conditionName, conditionStatus,conditionfaculty ]};
 
   User.find(condition)
     .then(data => {
