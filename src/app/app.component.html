@@ -2,22 +2,22 @@
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <img src="https://lh3.googleusercontent.com/-RepeSWc_hL0/XsEcWv3PtAI/AAAAAAAArSE/XpH9P3mXwdkLM87nroI8s-nBj6Xac4jQQCK8BGAsYHg/s512/logo%2Bpng.png" class="navbar-brand" style="width:6%">
     <div class="navbar-nav mr-auto">
-      <li class="nav-item">
+      <li *ngIf="displayForStudent" class="nav-item">
         <a routerLink="tutorials" class="nav-link">Tutorials</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="displayForLecturer" class="nav-item">
         <a routerLink="add" class="nav-link">Add</a>
       </li>
-      <li class="nav-item">
+      <li  class="nav-item">
         <a routerLink="home" class="nav-link">Home</a>
       </li>
-      <li class="nav-item">
+      <li *ngIf="displayForLecturer" class="nav-item">
         <a routerLink="users" class="nav-link">Users</a>
       </li>
 
-      <button class="nav-item" type="button" routerLink="signin" class="btn btn-success">Sign in</button> 
+      <button *ngIf="displaySigning" class="nav-item" type="button" routerLink="signin" class="btn btn-success">Sign in</button> 
       <br>
-      <button class="nav-item" type="button" routerLink="signup" class="btn btn-success">Sign up</button>
+      <button *ngIf="displaySigning" class="nav-item" type="button" routerLink="signup" class="btn btn-success">Sign up</button>
       
 
 
@@ -25,6 +25,6 @@
   </nav>
 
   <div class="container mt-3">
-    <router-outlet></router-outlet>
+    <router-outlet (activate)="componentAdded($event)" (deactivate)="componentRemoved($event)" ></router-outlet>
   </div>
 </div>

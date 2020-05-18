@@ -18,6 +18,10 @@ import { Faculty } from 'src/app/models/faculty.model';
 
 export class AddTutorialComponent implements OnInit {
 
+  displayForLecturer:boolean
+  displayForStudent=true
+  displaySigning=false
+
   tutorial: Tutorial;
   isLoading = false;
   form: FormGroup;
@@ -41,6 +45,12 @@ export class AddTutorialComponent implements OnInit {
       console.log(this.facultiesList);
   });
     this.currentUser = this.authonticationService.currentUserValue;
+    if(this.currentUser.status=="lecturer"){
+      this.displayForLecturer=true
+    }
+    else{
+      this.displayForLecturer=false
+    }
     this.form = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]

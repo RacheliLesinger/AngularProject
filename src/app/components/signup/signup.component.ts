@@ -8,6 +8,10 @@ import { AuthonticationService } from 'src/app/services/authontication.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  displayForLecturer=true
+  displayForStudent=true
+ 
+  displaySigning=false
 users:any=[];
 user = {
   first:'',

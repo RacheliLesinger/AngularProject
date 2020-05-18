@@ -10,6 +10,11 @@ import { AuthonticationService } from 'src/app/services/authontication.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  
+  displayForLecturer=false
+  displayForStudent=false
+  displaySigning=true
+
 
   currentUser :User;
   tutorials: any;
@@ -18,9 +23,13 @@ export class HomeComponent implements OnInit {
   title = '';
   
   constructor(private tutorialService: TutorialService,
-              private authonticationService: AuthonticationService) { }
+              private authonticationService: AuthonticationService) {
+            
+               }
 
   ngOnInit() {
+
+    
     this.retrieveTutorials();
     this.currentUser = this.authonticationService.currentUserValue;
     

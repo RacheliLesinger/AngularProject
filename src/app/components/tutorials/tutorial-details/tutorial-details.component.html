@@ -51,18 +51,20 @@
   </form>
 
 
-  <button class="btn btn-secondary" (click)="deleteTutorial()">
+  <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
     Delete
   </button>
   <span>  </span>
-  <button type="submit" class="btn btn-secondary" (click)="updateTutorial()">
+  <button type="submit" class="badge badge-success" (click)="updateTutorial()">
     Update
   </button>
 
   <p>{{ message }}</p>
 </div>
-
+<br />
+<br />
+<br />
 <div *ngIf="!currentTutorial">
-  <br />
+ 
   <p>Cannot access this Tutorial...</p>
 </div>

@@ -5,16 +5,18 @@ import { TutorialDetailsComponent } from './components/tutorials/tutorial-detail
 import { AddTutorialComponent } from './components/tutorials/add-tutorial/add-tutorial.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { HomeComponent } from './components/home/home.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'tutorials', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'tutorials', component: TutorialsListComponent },
   { path: 'tutorials/:id', component: TutorialDetailsComponent },
   { path: 'users', component: UsersListComponent },
   { path: 'users/:id', component: UserDetailsComponent },
-  { path: 'add', component: AddTutorialComponent }
+  { path: 'add', component: AddTutorialComponent },
+  { path: 'home', component: HomeComponent }
   
 ];
 
