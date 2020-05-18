@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from "@angular/forms";
+import { AgmCoreModule } from '@agm/core';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -68,7 +69,15 @@ const appRoutes: Routes = [
     MatToolbarModule,
     MatExpansionModule,
     ReactiveFormsModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCjA9p3fjmrFaFdPDW0mKkyfmUCLo2MweM'
+      /* apiKey is required, unless you are a
+      premium customer, in which case you can
+      use clientId
+      */
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   currentTutorial = null;
   currentIndex = -1;
   title = '';
+  agmMap: any;
   
   constructor(private tutorialService: TutorialService,
               private authonticationService: AuthonticationService) { }
@@ -31,6 +32,7 @@ export class HomeComponent implements OnInit {
       return Math.ceil(this.tutorials.length / 3);
     return 1;  
 }
+
 
   retrieveTutorials() {
     this.tutorialService.getAll()

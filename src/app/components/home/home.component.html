@@ -138,7 +138,16 @@
       <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +00 1515151515</p>
       <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>  test@test.com</p>
     </div>
+
+
     <div class="w3-col m7">
+      <agm-map [latitude]="56" [longitude]="10" style="height:300px;"
+      [mapTypeId]='mapType' [zoom]="2">
+      </agm-map>
+     <!--  <agm-map [latitude]="false" [longitude]="false" [zoom]="zoom" [styles]="styles" [mapTypeId]='mapType' #AgmMap></agm-map>
+   -->  </div>
+
+   <!--  <div class="w3-col m7">
       <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
       <div class="w3-section">      
         <label>Name</label>
@@ -156,7 +165,7 @@
       <label>I Like it!</label>
       <button type="submit" class="w3-button w3-right w3-theme">Send</button>
       </form>
-    </div>
+    </div> -->
   </div>
 </div>
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthonticationService } from 'src/app/services/authontication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -24,6 +25,7 @@ onSend({value, valid}){
   if(valid){
     console.log(value);
     this.saveNewUser();
+    this.router.navigate(['/tutorials/' ]);
   }
   else{
     console.log("Not Valid")
@@ -61,7 +63,8 @@ saveNewUser()
 }
 
  constructor(private userService: UserService,
-  private authonticationService: AuthonticationService) { }
+  private authonticationService: AuthonticationService,
+  private router: Router) { }
 
   ngOnInit() {
   }

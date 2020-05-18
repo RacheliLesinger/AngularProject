@@ -1,6 +1,7 @@
 const db = require("../models");
 const User = db.users;
 
+
 // Create and Save a new user
 exports.create = (req, res) => {
   // Validate request
@@ -39,16 +40,36 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   const username = req.query.username;
   const status = req.query.status;
+  const faculty = req.query.faculty;
   //var condition = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
   //condition = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
 
   var conditionName = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
   var conditionStatus = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
-  var conditionfaculty = faculty ? { faculty: { $regex: new RegExp(faculty), $options: "i" } } : {};
+  var conditionfaculty = faculty ? { faculty: { $regex: new RegExp(faculty) , $options: "i"} } : {};
  
-var condition =  { $and: [ conditionName, conditionStatus,conditionfaculty ]};
+var condition =  { $and: [ conditionName, conditionStatus ]};
+
+
+
 
   User.find(condition)
+  .populate({ path: 'faculty', match: conditionfaculty})
+  .exec(function (err, data) {
+    if (err) return res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving users."
+    });
+    res.send(data);
+    console.log('The user data are an array: ', data);
+  })
+  /* populate({
+    path: 'Faculty',
+    match: conditionfaculty
+    // Explicitly exclude `_id`, see http://bit.ly/2aEfTdB
+    //select: 'name -_id'
+  })
+  .exec() 
     .then(data => {
       res.send(data);
     })
@@ -57,7 +78,7 @@ var condition =  { $and: [ conditionName, conditionStatus,conditionfaculty ]};
         message:
           err.message || "Some error occurred while retrieving users."
       });
-    });
+    });*/
 };
 
 // Find a single User with an id
