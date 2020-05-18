@@ -48,7 +48,7 @@ exports.findAll = (req, res) => {
   var conditionStatus = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
   var conditionfaculty = faculty ? { faculty: { $regex: new RegExp(faculty) , $options: "i"} } : {};
  
-var condition =  { $and: [ conditionName, conditionStatus ]};
+  var condition =  { $and: [ conditionName, conditionStatus ]};
 
 
 
@@ -61,8 +61,13 @@ var condition =  { $and: [ conditionName, conditionStatus ]};
         "545 " + err.message  || "Some error occurred while retrieving users."
     });
     res.send(data);
-    console.log('The user data are an array: ', data);
   })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving tutorials."
+    });
+  });
   /* populate({
     path: 'Faculty',
     match: conditionfaculty

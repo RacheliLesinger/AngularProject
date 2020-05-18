@@ -4,5 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     router.get("/",faculties.getAll);
+    router.get("/:id", faculties.findOne);
+    
     app.use("/api/faculties", router);
 }
