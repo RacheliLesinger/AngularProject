@@ -45,7 +45,7 @@ saveNewUser()
     username: this.user.name,
     email: this.user.email,
     address: this.user.address,
-    //faculty: this.user.faculty,
+    faculty: this.user.faculty,
     password: this.user.password,
 
 

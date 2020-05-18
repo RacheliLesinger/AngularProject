@@ -54,11 +54,11 @@ var condition =  { $and: [ conditionName, conditionStatus ]};
 
 
   User.find(condition)
-  .populate({ path: 'faculty', match: conditionfaculty})
+  .populate({ path: 'faculty'/*  , match: conditionfaculty */ })
   .exec(function (err, data) {
     if (err) return res.status(500).send({
       message:
-        err.message || "Some error occurred while retrieving users."
+        "545 " + err.message  || "Some error occurred while retrieving users."
     });
     res.send(data);
     console.log('The user data are an array: ', data);

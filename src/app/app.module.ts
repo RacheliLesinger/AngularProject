@@ -72,11 +72,8 @@ const appRoutes: Routes = [
     MatPaginatorModule,
 
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCjA9p3fjmrFaFdPDW0mKkyfmUCLo2MweM'
-      /* apiKey is required, unless you are a
-      premium customer, in which case you can
-      use clientId
-      */
+      apiKey: 'AIzaSyCjA9p3fjmrFaFdPDW0mKkyfmUCLo2MweM',
+      libraries: ['places']
     })
   ],
   providers: [],
