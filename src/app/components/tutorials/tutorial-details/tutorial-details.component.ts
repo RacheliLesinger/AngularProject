@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TutorialService } from 'src/app/services/tutorial.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import{UserService} from "src/app/services/user.service"
+import { FacultyService } from 'src/app/services/faculty.service';
 
 @Component({
   selector: 'app-tutorial-details',
@@ -17,6 +18,7 @@ export class TutorialDetailsComponent implements OnInit {
   constructor(
     private tutorialService: TutorialService,
     private userService: UserService,
+    private facultyService: FacultyService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -38,7 +40,12 @@ export class TutorialDetailsComponent implements OnInit {
           },  error => {
             console.log(error);
           });
-
+          this.facultyService.get(this.currentTutorial.faculty).subscribe( data =>{
+            this.currentFaculty=data;
+            console.log(data);
+          },  error => {
+            console.log(error);
+          });
           console.log(data);
         },
         error => {

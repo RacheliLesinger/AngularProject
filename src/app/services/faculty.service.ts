@@ -13,7 +13,9 @@ export class FacultyService {
   getAll() {
     return this.http.get(baseUrl);
   }
-
+  get(id) {
+    return this.http.get(`${baseUrl}/${id}`);
+  }
   
   
 

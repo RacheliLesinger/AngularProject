@@ -9,9 +9,9 @@
      <span>{{currentUser.first_name}} </span>
      <span>{{currentUser.last_name}}</span>
    </div>
-   <div >
+   <div *ngIf="currentFaculty">
     <span>Faculty: </span>
-     <span>{{currentTutorial.faculty}} </span>
+     <span>{{currentFaculty.facultyName}} </span>
    </div>
   
     <img [src]="currentTutorial?.img"  alt="Norway" class="w3-hover-opacity" >
