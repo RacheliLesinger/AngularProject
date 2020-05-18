@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -14,12 +14,12 @@ export class AppComponent {
   displayForLecturer:boolean;
   displayForStudent:boolean;
 
-  constructor(router:Router){
+  constructor(){
     
     this.displaySigning =false;
     this.displayForLecturer=false;
     this.displayForStudent=false;
-    router.navigate(['/Merge']);
+
   }
   componentAdded(component){
     this.displaySigning=component.displaySigning;

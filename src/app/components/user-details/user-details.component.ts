@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-user-details',
@@ -10,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class UserDetailsComponent implements OnInit {
   currentUser = null;
   message = '';
+  lectures:User[]=[];
 
   constructor(
     private userService: UserService,
@@ -19,6 +21,7 @@ export class UserDetailsComponent implements OnInit {
   ngOnInit() {
     this.message = '';
     this.getUser(this.route.snapshot.paramMap.get('id'));
+    this. tutorialsForLecturer();
   }
 
   getUser(user) {
@@ -31,6 +34,13 @@ export class UserDetailsComponent implements OnInit {
         error => {
           console.log(error);
         });
+  }
+
+  tutorialsForLecturer(){
+    this.userService.findByStatus("lecturer").subscribe((usersData: []) => {
+      this.lectures = usersData;
+      console.log(this.lectures);
+  });
   }
 
   deleteUser() {

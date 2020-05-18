@@ -11,8 +11,8 @@ import { AuthonticationService } from 'src/app/services/authontication.service';
 })
 export class HomeComponent implements OnInit {
   
-  displayForLecturer=false
-  displayForStudent=false
+  displayForLecturer=true
+  displayForStudent=true
   displaySigning=true
 
 
