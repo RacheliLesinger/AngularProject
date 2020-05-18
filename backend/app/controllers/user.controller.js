@@ -1,6 +1,6 @@
 const db = require("../models");
 const User = db.users;
-
+var mongoose = require('mongoose');
 
 // Create and Save a new user
 exports.create = (req, res) => {
@@ -46,36 +46,24 @@ exports.findAll = (req, res) => {
 
   var conditionName = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
   var conditionStatus = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
-  var conditionfaculty = faculty ? { faculty: { $regex: new RegExp(faculty) , $options: "i"} } : {};
- 
-  var condition =  { $and: [ conditionName, conditionStatus ]};
+  var conditionfaculty = faculty ? { faculty:  mongoose.Types.ObjectId(faculty)  }: {};
+  var condition =  { $and: [ conditionName, conditionStatus, conditionfaculty ]};
 
 
 
 
   User.find(condition)
-  .populate({ path: 'faculty'/*  , match: conditionfaculty */ })
+  .populate({ path: 'faculty' ,select: 'facultyName'  /* , match: conditionfaculty  */  })
   .exec(function (err, data) {
     if (err) return res.status(500).send({
       message:
-        "545 " + err.message  || "Some error occurred while retrieving users."
+        err.message  || "Some error occurred while retrieving users."
     });
     res.send(data);
-  })
-  .catch(err => {
-    res.status(500).send({
-      message:
-        err.message || "Some error occurred while retrieving tutorials."
-    });
   });
-  /* populate({
-    path: 'Faculty',
-    match: conditionfaculty
-    // Explicitly exclude `_id`, see http://bit.ly/2aEfTdB
-    //select: 'name -_id'
-  })
-  .exec() 
-    .then(data => {
+  
+
+   /*  .then(data => {
       res.send(data);
     })
     .catch(err => {
@@ -83,7 +71,7 @@ exports.findAll = (req, res) => {
         message:
           err.message || "Some error occurred while retrieving users."
       });
-    });*/
+    }); */
 };
 
 // Find a single User with an id
