@@ -9,6 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  displayForLecturer=true
+  displayForStudent=true
+ 
+  displaySigning=false
 users:any=[];
 user = {
   first:'',

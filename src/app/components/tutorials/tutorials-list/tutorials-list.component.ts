@@ -1,6 +1,7 @@
 import { Component, OnInit , OnDestroy} from '@angular/core';
 import { TutorialService } from 'src/app/services/tutorial.service';
-
+import { AuthonticationService } from 'src/app/services/authontication.service';
+import { User } from 'src/app/models/user.model';
 import { PageEvent } from "@angular/material";
 import { Subscription } from "rxjs";
 
@@ -16,6 +17,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./tutorials-list.component.css']
 })
 export class TutorialsListComponent implements OnInit , OnDestroy{
+ 
+  displayForLecturer:boolean
+  displayForStudent=true
+  displaySigning=false
+  currentUser :User;
   tutorials: Tutorial[] = [];
   isLoading = false;
   totalTutorials = 0;
@@ -25,12 +31,14 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
   private tutorialsSub: Subscription;
 
   constructor(private tutorialService: TutorialService,
-              private router: Router
+              private router: Router,
+              private authonticationService: AuthonticationService
             ) { }
 
   ngOnInit() {
  
     this.isLoading = true;
+    
     this.tutorialService.getTutorials(this.tutorialsPerPage, this.currentPage);
     this.tutorialsSub = this.tutorialService
       .getTutorialUpdateListener()
@@ -39,6 +47,13 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
         this.totalTutorials = tutorialData.tutorialCount;
         this.tutorials = tutorialData.tutorials;
       });
+      this.currentUser = this.authonticationService.currentUserValue;
+    if(this.currentUser.status=="lecturer"){
+      this.displayForLecturer=true
+    }
+    else{
+      this.displayForLecturer=false
+    }
   }
 
   openTutorialsDetails(tutorial)
