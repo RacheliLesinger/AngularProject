@@ -88,7 +88,20 @@
     </div>
     </div>
       <!--faculty-->
-<div class="form-group">
+      <div class="form-group">
+        <label>Faculty</label>
+        <br/>
+      <mat-form-field>
+        <mat-label>Choose an option</mat-label>
+        <mat-select matInput   [(ngModel)] = "user.faculty" name ="faculty">
+          <mat-option  *ngFor="let f of facultiesList" [value]=f?.id>{{f?.facultyName}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="user.faculty.invalid">Please enter a user faculty.</mat-error>
+      </mat-form-field>
+      </div>
+
+
+<!-- <div class="form-group">
   <label>Faculty</label>
       <input type="text" class="form-control" 
       [(ngModel)] = "user.faculty"
@@ -100,7 +113,7 @@
       userFaculty.touched" class="alert alert-danger">
       Faculty is Required
     </div>
-    </div>
+    </div> -->
   <!--password-->
   <div class="form-group">
   <label>Password</label>

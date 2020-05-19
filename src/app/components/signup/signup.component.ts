@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { AuthonticationService } from 'src/app/services/authontication.service';
 import { Router } from '@angular/router';
+import { FacultyService } from 'src/app/services/faculty.service';
+import { Faculty } from 'src/app/models/faculty.model';
 
 @Component({
   selector: 'app-signup',
@@ -12,24 +14,25 @@ export class SignupComponent implements OnInit {
   displayForLecturer=true
   displayForStudent=true
  
-  displaySigning=false
-users:any=[];
-user = {
-  first:'',
-  last:'',
-  name:'',
-  email:'',
-  address:'',
-  faculty:'',
-  password:''
-};
-submitted = false;
+  displaySigning=false;
+  facultiesList:Faculty[] = [];
+  users:any=[];
+  user = {
+    first:'',
+    last:'',
+    name:'',
+    email:'',
+    address:'',
+    faculty:'',
+    password:''
+  };
+  submitted = false;
 
 onSend({value, valid}){
   if(valid){
     console.log(value);
     this.saveNewUser();
-    this.router.navigate(['/tutorials/' ]);
+    
   }
   else{
     console.log("Not Valid")
@@ -45,12 +48,10 @@ saveNewUser()
     username: this.user.name,
     email: this.user.email,
     address: this.user.address,
-    //faculty: this.user.faculty,
+    faculty: this.user.faculty,
     password: this.user.password,
 
-
     status:"student"
-    //faculty:faculty
   };
 
   
@@ -60,6 +61,7 @@ saveNewUser()
         console.log(response);
         this.authonticationService.initUser(response);
         this.submitted = true;
+        this.router.navigate(['/tutorials/' ]);
       },
       error => {
         console.log(error);
@@ -68,9 +70,14 @@ saveNewUser()
 
  constructor(private userService: UserService,
   private authonticationService: AuthonticationService,
+  private facultysService:FacultyService,
   private router: Router) { }
 
   ngOnInit() {
+    this.facultysService.getAll().subscribe((facultiesData: []) => {
+      this.facultiesList = facultiesData;
+      console.log(this.facultiesList);
+  });
   }
 
   //addUser(newName, newEmail,  newPassword){}

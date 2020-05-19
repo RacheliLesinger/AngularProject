@@ -134,18 +134,30 @@
     <div class="w3-padding-16"><span class="w3-xlarge w3-border-teal w3-bottombar">Contact Us</span></div>
       <h3>Address</h3>
       <p>Swing by for a cup of coffee, or whatever.</p>
-      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>  Chicago, US</p>
-      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +00 1515151515</p>
+      <p><i class="fa fa-map-marker w3-text-teal w3-xlarge"></i>  Lod, Israel</p>
+      <p><i class="fa fa-phone w3-text-teal w3-xlarge"></i>  +972 1515151515</p>
       <p><i class="fa fa-envelope-o w3-text-teal w3-xlarge"></i>  test@test.com</p>
     </div>
 
 
     <div class="w3-col m7">
-      <agm-map [latitude]="56" [longitude]="10" style="height:300px;"
-      [mapTypeId]='mapType' [zoom]="2">
+
+      <agm-map 
+      [latitude]="latitude" 
+      [longitude]="longitude" 
+      [zoom]="zoom" >
+        <agm-marker 
+        [latitude]="latitude" 
+        [longitude]="longitude"></agm-marker>
       </agm-map>
+      
+
+     <!--  <agm-map [latitude]="56" [longitude]="10" style="height:300px;"
+      [mapTypeId]='mapType' [zoom]="2">
+      </agm-map> -->
      <!--  <agm-map [latitude]="false" [longitude]="false" [zoom]="zoom" [styles]="styles" [mapTypeId]='mapType' #AgmMap></agm-map>
-   -->  </div>
+   --> 
+   </div>
 
    <!--  <div class="w3-col m7">
       <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="/action_page.php" target="_blank">
