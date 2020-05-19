@@ -2,7 +2,7 @@
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <form [formGroup]="form" (submit)="onSaveTutorial()" *ngIf="!isLoading">
     <div>
-    <mat-form-field>
+    <mat-form-field *ngIf=facultiesList  >
       <mat-label>Choose an option</mat-label>
       <mat-select matInput  formControlName="faculty" >
         <mat-option  *ngFor="let faculty of facultiesList| slice:0:third " [value]=faculty.id>{{faculty.facultyName}}</mat-option>
@@ -30,8 +30,8 @@
     </mat-form-field>
     <div>
     <mat-form-field>
-      <input matInput type="url" formControlName="link" placeholder="Tutorial Link">
-      <mat-error *ngIf="form.get('link').invalid">Please enter a tutorial link.</mat-error>
+      <input matInput type="url" pattern="https?://.*" formControlName="link" placeholder="Tutorial Link">
+      <mat-error *ngIf="form.get('link').invalid">Link must start with "https://".</mat-error>
     </mat-form-field>
   </div>
     <button mat-raised-button color="accent" type="submit">Save Tutorial</button>

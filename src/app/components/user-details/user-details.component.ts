@@ -37,7 +37,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   tutorialsForLecturer(){
-    this.userService.findByStatus("lecturer").subscribe((usersData: []) => {
+    this.userService.findByParams("lecturer","","").subscribe((usersData: []) => {
       this.lectures = usersData;
       console.log(this.lectures);
   });

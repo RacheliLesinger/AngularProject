@@ -28,7 +28,7 @@ export class AddTutorialComponent implements OnInit {
   imagePreview: string;
   private mode = "create";
   private tutorialId: string;
-  currentUser :User;
+  currentUser :User=null;
   facultiesList:Faculty[] = [];
   
 
@@ -45,12 +45,14 @@ export class AddTutorialComponent implements OnInit {
       console.log(this.facultiesList);
   });
     this.currentUser = this.authonticationService.currentUserValue;
+    if(this.currentUser!=null){
     if(this.currentUser.status=="lecturer"){
       this.displayForLecturer=true
     }
     else{
       this.displayForLecturer=false
     }
+  }
     this.form = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]

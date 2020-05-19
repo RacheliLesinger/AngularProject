@@ -1,7 +1,8 @@
 const db = require("../models");
 const User = db.users;
+const Tutorial = db.tutorials;
 
-
+ 
 // Create and Save a new user
 exports.create = (req, res) => {
   // Validate request
@@ -36,6 +37,7 @@ exports.create = (req, res) => {
     });
 };
 
+
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
   const username = req.query.username;
@@ -48,12 +50,12 @@ exports.findAll = (req, res) => {
   var conditionStatus = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
   var conditionfaculty = faculty ? { faculty: { $regex: new RegExp(faculty) , $options: "i"} } : {};
  
-  var condition =  { $and: [ conditionName, conditionStatus ]};
+  var condition =  { $and: [ conditionName, conditionStatus,conditionfaculty ]};
 
 
 
 
-  User.find(conditionName,conditionStatus,conditionfaculty)
+  User.find(condition)
   
   .then(data => {
     res.send(data);
