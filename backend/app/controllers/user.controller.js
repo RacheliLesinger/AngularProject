@@ -1,5 +1,6 @@
 const db = require("../models");
 const User = db.users;
+const Tutorial = db.tutorials;
 var mongoose = require('mongoose');
 
 // Create and Save a new user
@@ -76,6 +77,7 @@ exports.findAll = (req, res) => {
 
 // Find a single User with an id
 exports.findOne = (req, res) => {
+  console.log("*****************************************")
   const id = req.params.id;
 
   User.findById(id)
@@ -167,4 +169,25 @@ exports.findAllPublished = (req, res) => {
           err.message || "Some error occurred while retrieving Users."
       });
     });
+};
+
+exports.numOfTutorial = (req, res) => {
+  console.log("----------------------------------------------------------------")
+  Tutorial.aggregate( [
+    {
+      $group: {
+         _id :"$name",
+         count: {  $sum: 1 }
+      }
+    }
+  ] ).then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving Users."
+    });
+  });
+ 
 };

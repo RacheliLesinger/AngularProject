@@ -11,7 +11,9 @@ import { User } from 'src/app/models/user.model';
 export class UserDetailsComponent implements OnInit {
   currentUser = null;
   message = '';
-  lectures:User[]=[];
+  lectures=[];
+  tutorialPerLecturer=[];
+  user:any;
 
   constructor(
     private userService: UserService,
@@ -19,9 +21,25 @@ export class UserDetailsComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.userService.getnumOfTutorial().subscribe((lecturesData: []) => {
+      this.lectures = lecturesData;
+      console.log(this.lectures);
+      this.lectures.forEach(value=>{
+        console.log("value",value);
+        this.userService.get(value._id).subscribe(
+          data => {
+           this.user=data
+           this.tutorialPerLecturer.push({lecturer:this.user.first_name+" "+this.user.last_name,count:value.count})
+          }
+        )
+       
+      });
+      
+  });
+
     this.message = '';
     this.getUser(this.route.snapshot.paramMap.get('id'));
-    this. tutorialsForLecturer();
+   
   }
 
   getUser(user) {
@@ -36,12 +54,7 @@ export class UserDetailsComponent implements OnInit {
         });
   }
 
-  tutorialsForLecturer(){
-    this.userService.findByParams("lecturer","","").subscribe((usersData: []) => {
-      this.lectures = usersData;
-      console.log(this.lectures);
-  });
-  }
+  
 
   deleteUser() {
     this.userService.delete(this.currentUser.id)

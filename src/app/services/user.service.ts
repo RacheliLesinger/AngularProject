@@ -14,7 +14,10 @@ export class UserService {
   }
 
   get(id) {
-    return this.http.get(`${baseUrl}/${id}`);
+    return this.http.get(`${baseUrl}/user/${id}`);
+  }
+  getnumOfTutorial() {
+    return this.http.get(`${baseUrl}/query/numOfTutorial`);
   }
 
   create(data) {
