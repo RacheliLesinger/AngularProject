@@ -1,13 +1,7 @@
 const db = require("../models");
 const User = db.users;
-<<<<<<< HEAD
-const Tutorial = db.tutorials;
-
- 
-=======
 var mongoose = require('mongoose');
 
->>>>>>> 9ff92f72ee95b06b46d15de7227983ddebcc27b7
 // Create and Save a new user
 exports.create = (req, res) => {
   // Validate request
@@ -42,7 +36,6 @@ exports.create = (req, res) => {
     });
 };
 
-
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
   const username = req.query.username;
@@ -53,31 +46,16 @@ exports.findAll = (req, res) => {
 
   var conditionName = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
   var conditionStatus = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
-<<<<<<< HEAD
-  var conditionfaculty = faculty ? { faculty: { $regex: new RegExp(faculty) , $options: "i"} } : {};
- 
-  var condition =  { $and: [ conditionName, conditionStatus,conditionfaculty ]};
-=======
   var conditionfaculty = faculty ? { faculty:  mongoose.Types.ObjectId(faculty)  }: {};
   var condition =  { $and: [ conditionName, conditionStatus, conditionfaculty ]};
->>>>>>> 9ff92f72ee95b06b46d15de7227983ddebcc27b7
 
 
 
 
   User.find(condition)
-<<<<<<< HEAD
-  
-  .then(data => {
-    res.send(data);
-  })
-  .catch(err => {
-    res.status(500).send({
-=======
   .populate({ path: 'faculty' ,select: 'facultyName'  /* , match: conditionfaculty  */  })
   .exec(function (err, data) {
     if (err) return res.status(500).send({
->>>>>>> 9ff92f72ee95b06b46d15de7227983ddebcc27b7
       message:
         err.message  || "Some error occurred while retrieving users."
     });
