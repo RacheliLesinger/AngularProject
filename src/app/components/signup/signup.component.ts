@@ -41,7 +41,7 @@ onSend({value, valid}){
 
 saveNewUser()
 {
-  debugger;
+ 
   const data = {
     first_name: this.user.first,
     last_name: this.user.last,

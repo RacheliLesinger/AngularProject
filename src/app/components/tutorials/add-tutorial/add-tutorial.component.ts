@@ -8,6 +8,7 @@ import { AuthonticationService } from 'src/app/services/authontication.service';
 import { User } from 'src/app/models/user.model';
 import { FacultyService } from 'src/app/services/faculty.service';
 import { Faculty } from 'src/app/models/faculty.model';
+import { SharedService } from 'src/app/services/shared-service';
 
 
 @Component({
@@ -17,6 +18,9 @@ import { Faculty } from 'src/app/models/faculty.model';
 })
 
 export class AddTutorialComponent implements OnInit {
+ 
+  
+  
 
   displayForLecturer:boolean
   displayForStudent=true
@@ -29,15 +33,19 @@ export class AddTutorialComponent implements OnInit {
   private mode = "create";
   private tutorialId: string;
   currentUser :User=null;
+  tutorialLecturerFullName:string;
   facultiesList:Faculty[] = [];
   
 
   constructor(
+    private sharedService: SharedService,
     public tutorialsService: TutorialService,
     public facultysService:FacultyService,
     public route: ActivatedRoute,
     private authonticationService: AuthonticationService
-  ) {}
+  ) {
+  
+  }
 
   ngOnInit() {
     this.facultysService.getAll().subscribe((facultiesData: []) => {
@@ -100,6 +108,8 @@ export class AddTutorialComponent implements OnInit {
     });
   }
 
+ 
+
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     this.form.patchValue({ img: file });
@@ -120,6 +130,7 @@ export class AddTutorialComponent implements OnInit {
  
       console.log(this.currentUser)
       console.log(  this.form.value.faculty,)
+
       this.tutorialsService.addTutorial(
         this.form.value.title,
         this.form.value.faculty,
@@ -129,6 +140,10 @@ export class AddTutorialComponent implements OnInit {
         this.currentUser.id
 
       );
+      
+      this.tutorialLecturerFullName=this.currentUser.first_name+' '+this.currentUser.last_name;
+   
+      this.sharedService.emitChange(this.tutorialLecturerFullName);
     } else {
       this.tutorialsService.updateTutorial(
         this.tutorialId,

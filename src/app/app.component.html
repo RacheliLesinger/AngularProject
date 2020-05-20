@@ -24,7 +24,14 @@
     </div>
   </nav>
 
+
   <div class="container mt-3">
+    <div *ngIf="serverMessage"   #viewer class="body" >
+      <div mat-simple-snackbar class="viewer" >
+        {{openSnackBar() ? openSnackBar() : ""}}
+            <!-- <span>{{serverMessage}}</span> -->
+    </div>
+  </div>
     <router-outlet (activate)="componentAdded($event)" (deactivate)="componentRemoved($event)" ></router-outlet>
   </div>
 </div>

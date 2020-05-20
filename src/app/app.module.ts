@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AgmCoreModule } from '@agm/core';
+import{SharedService} from './services/shared-service'
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -28,9 +29,9 @@ import {
   MatCardModule,
   MatToolbarModule,
   MatExpansionModule,
-  
   MatPaginatorModule} 
   from '@angular/material';
+  import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 const appRoutes: Routes = [
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
+    
     AppComponent,
     AddTutorialComponent,
     TutorialDetailsComponent,
@@ -70,7 +72,7 @@ const appRoutes: Routes = [
     MatExpansionModule,
     ReactiveFormsModule,
     MatPaginatorModule,
-
+    MatSnackBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCjA9p3fjmrFaFdPDW0mKkyfmUCLo2MweM',
       libraries: ['places']
