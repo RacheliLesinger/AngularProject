@@ -8,7 +8,7 @@ const app = express();
 var corsOptions = {
   origin: "http://localhost:4200"
 };
-
+const expressWs = require('express-ws')(app);
 app.use(cors(corsOptions));
 
 
@@ -19,6 +19,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/images", express.static(path.join(__dirname, "images")));
 const db = require("./app/models");
+// function createMessage(msg) {
+//   return JSON.stringify(msg);
+// }
+var aWss = expressWs.getWss('/');
+app.ws('/', function(ws, req) {
+  ws.on('message', function(msg) {
+    console.log("-----------------------")
+    aWss.clients.forEach(function (client) {
+      client.send(msg);
+    });
+  });
+});
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
