@@ -11,12 +11,12 @@ import { AuthonticationService } from 'src/app/services/authontication.service';
 })
 export class HomeComponent implements OnInit {
   
-  displayForLecturer=true
-  displayForStudent=true
+  displayForLecturer=false
+  displayForStudent=false
   displaySigning=true
 
 
-  currentUser :User;
+  currentUser :User=null;
   tutorials: any;
   currentTutorial = null;
   currentIndex = -1;
@@ -30,15 +30,25 @@ export class HomeComponent implements OnInit {
   
   constructor(private tutorialService: TutorialService,
               private authonticationService: AuthonticationService) {
-            
+                this.currentUser = this.authonticationService.currentUserValue;
+                if(this.currentUser!=null){
+                if(this.currentUser.status=="lecturer"){
+                  this.displayForLecturer=true
+                 
+                }
+                else{
+                  this.displayForLecturer=false
+                }
+                this.displayForStudent=true
+              }
+                
                }
 
   ngOnInit() {
 
     this.setCurrentLocation();
     this.retrieveTutorials();
-    this.currentUser = this.authonticationService.currentUserValue;
-    
+   
   }
 
 // Get Current Location Coordinates

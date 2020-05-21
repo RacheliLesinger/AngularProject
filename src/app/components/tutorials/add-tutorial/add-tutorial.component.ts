@@ -44,14 +44,6 @@ export class AddTutorialComponent implements OnInit {
     public route: ActivatedRoute,
     private authonticationService: AuthonticationService
   ) {
-  
-  }
-
-  ngOnInit() {
-    this.facultysService.getAll().subscribe((facultiesData: []) => {
-      this.facultiesList = facultiesData;
-      console.log(this.facultiesList);
-  });
     this.currentUser = this.authonticationService.currentUserValue;
     if(this.currentUser!=null){
     if(this.currentUser.status=="lecturer"){
@@ -61,6 +53,14 @@ export class AddTutorialComponent implements OnInit {
       this.displayForLecturer=false
     }
   }
+  }
+
+  ngOnInit() {
+    this.facultysService.getAll().subscribe((facultiesData: []) => {
+      this.facultiesList = facultiesData;
+      console.log(this.facultiesList);
+  });
+  
     this.form = new FormGroup({
       title: new FormControl(null, {
         validators: [Validators.required, Validators.minLength(3)]

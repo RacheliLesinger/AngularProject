@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 })
 export class TutorialsListComponent implements OnInit , OnDestroy{
  
-  displayForLecturer:boolean
+  displayForLecturer=false
   displayForStudent=true
   displaySigning=false
   currentUser :User;
@@ -33,7 +33,16 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
   constructor(private tutorialService: TutorialService,
               private router: Router,
               private authonticationService: AuthonticationService
-            ) { }
+            ) { 
+              this.currentUser = this.authonticationService.currentUserValue;
+              console.log(this.currentUser.status)
+              if(this.currentUser.status=="lecturer"){
+                this.displayForLecturer=true
+              }
+              else{
+                this.displayForLecturer=false
+              }
+            }
 
   ngOnInit() {
  
@@ -47,13 +56,7 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
         this.totalTutorials = tutorialData.tutorialCount;
         this.tutorials = tutorialData.tutorials;
       });
-      this.currentUser = this.authonticationService.currentUserValue;
-    if(this.currentUser.status=="lecturer"){
-      this.displayForLecturer=true
-    }
-    else{
-      this.displayForLecturer=false
-    }
+  
   }
 
   openTutorialsDetails(tutorial)
