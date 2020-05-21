@@ -64,6 +64,8 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   const title = req.query.title;
   const faculty = req.query.faculty;
+  const description = req.query.description;
+
   //var condition = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
   //condition = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
   // var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};  
