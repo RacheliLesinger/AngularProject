@@ -47,11 +47,10 @@ export class AppComponent {
 
   
   openSnackBar() {
-    setTimeout(()=>{ 
+   
     this._snackBar.open(this.serverMessage, '', {
       duration: 3000,});
- 
-    });
+
     this.serverMessage=null;
 
 }
