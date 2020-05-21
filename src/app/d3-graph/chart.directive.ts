@@ -114,7 +114,8 @@ ngOnChanges(changes) {
 //           this.el.nativeElement.style.height="500";
 //           this.el.nativeElement.style.width="960";
 //   }
-
+// ---------------------------------------------------------------------------------------------------
+//  <<enother try
 //   private drawPie() {
       
 //     let g = this.svg.selectAll('.arc').data(this.pie(this.tutorialPerLecturer)).enter().append('g')
