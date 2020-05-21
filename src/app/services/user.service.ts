@@ -19,6 +19,9 @@ export class UserService {
   getnumOfTutorial() {
     return this.http.get(`${baseUrl}/query/numOfTutorial`);
   }
+  findExistsUse(uname,psw) {
+    return this.http.get(`${baseUrl}/query/findExistsUse?&uname=${uname}&psw=${psw}`);
+  }
 
   create(data) {
     return this.http.post(baseUrl, data);

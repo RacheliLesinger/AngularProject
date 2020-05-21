@@ -3,6 +3,9 @@ import { TutorialService } from 'src/app/services/tutorial.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import{UserService} from "src/app/services/user.service"
 import { FacultyService } from 'src/app/services/faculty.service';
+import { AuthonticationService } from 'src/app/services/authontication.service';
+import { User } from 'src/app/models/user.model';
+
 
 @Component({
   selector: 'app-tutorial-details',
@@ -10,6 +13,10 @@ import { FacultyService } from 'src/app/services/faculty.service';
   styleUrls: ['./tutorial-details.component.css']
 })
 export class TutorialDetailsComponent implements OnInit {
+  displayForLecturer:boolean
+  displayForStudent=true
+  displaySigning=false
+  currentUserSignIn:User=null
   currentTutorial = null;
   currentUser=null;
   currentFaculty=null;
@@ -20,7 +27,18 @@ export class TutorialDetailsComponent implements OnInit {
     private userService: UserService,
     private facultyService: FacultyService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private authonticationService: AuthonticationService) {
+      this.currentUserSignIn = this.authonticationService.currentUserValue;
+      if(this.currentUser!=null){
+      if(this.currentUser.status=="lecturer"){
+        this.displayForLecturer=true
+      }
+      else{
+        this.displayForLecturer=false
+      }
+    }
+     }
 
   ngOnInit() {
     this.message = '';

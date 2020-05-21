@@ -36,7 +36,24 @@ exports.create = (req, res) => {
       });
     });
 };
+exports.findExistsUse=(req, res)=>{
 
+  const username = req.query.uname;
+  const password = req.query.psw;
+  var conditionName = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
+  var conditionPassword = password ? { password: { $regex: new RegExp(password), $options: "i" } } : {};
+  var condition =  { $and: [ conditionName,conditionPassword ]};
+  User.findOne(condition).then(data=> {
+    if (!data)
+      res.status(404).send({ message: "Not found User with userName and password "  });
+    else res.send(data);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .send({ message: "Error retrieving User with id=" + id });
+  });
+}
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
   const username = req.query.username;
@@ -77,7 +94,7 @@ exports.findAll = (req, res) => {
 
 // Find a single User with an id
 exports.findOne = (req, res) => {
-  console.log("*****************************************")
+
   const id = req.params.id;
 
   User.findById(id)
@@ -171,8 +188,10 @@ exports.findAllPublished = (req, res) => {
     });
 };
 
+
+
 exports.numOfTutorial = (req, res) => {
-  console.log("----------------------------------------------------------------")
+
   Tutorial.aggregate( [
     {
       $group: {

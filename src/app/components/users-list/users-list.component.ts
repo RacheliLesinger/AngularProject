@@ -11,7 +11,9 @@ import { FacultyService } from 'src/app/services/faculty.service';
   styleUrls: ['./users-list.component.css']
 })
 export class UsersListComponent implements OnInit {
-
+  displayForLecturer=true
+  displayForStudent=true
+  displaySigning=false
 
   users: any;
   faculties: any;

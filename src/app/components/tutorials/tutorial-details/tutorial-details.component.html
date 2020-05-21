@@ -51,11 +51,11 @@
   </form>
 
 
-  <button class="badge badge-danger mr-2" (click)="deleteTutorial()">
+  <button *ngIf="currentUserSignIn.status=='lecturer'" class="badge badge-danger mr-2" (click)="deleteTutorial()">
     Delete
   </button>
   <span>  </span>
-  <button type="submit" class="badge badge-success" (click)="updateTutorial()">
+  <button *ngIf="currentUserSignIn.status=='lecturer'" type="submit" class="badge badge-success" (click)="updateTutorial()">
     Update
   </button>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
+import { AuthonticationService } from 'src/app/services/authontication.service';
 
 @Component({
   selector: 'app-user-details',
@@ -9,6 +10,10 @@ import { User } from 'src/app/models/user.model';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
+  currentUserSignIn:User=null
+  displayForLecturer:boolean
+  displayForStudent=true
+  displaySigning=false
   currentUser = null;
   message = '';
   lectures=[];
@@ -18,7 +23,18 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     private userService: UserService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private authonticationService: AuthonticationService)  {
+      this.currentUserSignIn = this.authonticationService.currentUserValue;
+      if(this.currentUser!=null){
+      if(this.currentUser.status=="lecturer"){
+        this.displayForLecturer=true
+      }
+      else{
+        this.displayForLecturer=false
+      }
+    }
+     }
 
   ngOnInit() {
     this.userService.getnumOfTutorial().subscribe((lecturesData: []) => {
