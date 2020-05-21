@@ -4,10 +4,9 @@ import { AuthonticationService } from 'src/app/services/authontication.service';
 import { User } from 'src/app/models/user.model';
 import { PageEvent } from "@angular/material";
 import { Subscription } from "rxjs";
-
 import { Tutorial } from 'src/app/models/tutorial.model';
-
 import { Router } from '@angular/router';
+import { FacultyService } from 'src/app/services/faculty.service';
 
 
 
@@ -27,19 +26,35 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
   totalTutorials = 0;
   tutorialsPerPage = 9;
   currentPage = 1;
+  tutorials_search:any;
+
+  faculties: any;
+  currentTutoria = null;
+  currentIndex = -1;
+
+
+
+
+  title = '';
+  description = '';
+  faculty: '';
 
   private tutorialsSub: Subscription;
 
   constructor(private tutorialService: TutorialService,
               private router: Router,
-              private authonticationService: AuthonticationService
+              private authonticationService: AuthonticationService,
+              private facultyService: FacultyService,
+
             ) { }
 
   ngOnInit() {
- 
+    this.retrieveFaculties();
+
+    this.retrieveTutorials();
     this.isLoading = true;
     
-    this.tutorialService.getTutorials(this.tutorialsPerPage, this.currentPage);
+    // this.tutorialService.getTutorials(this.tutorialsPerPage, this.currentPage);
     this.tutorialsSub = this.tutorialService
       .getTutorialUpdateListener()
       .subscribe((tutorialData: {tutorials: Tutorial[], tutorialCount: number}) => {
@@ -56,11 +71,41 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
     }
   }
 
+ 
+
+  retrieveFaculties() {
+    this.facultyService.getAll()
+      .subscribe(
+        data => {
+          this.faculties = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
+  }
+
+  retrieveTutorials() {
+    this.tutorialService.getAll()
+      .subscribe(
+        data => {
+          this.tutorials_search = data;
+          console.log("@@@@learrr@@@@");
+          console.log( this.tutorials_search);
+        },
+        error => {
+          console.log(error);
+        });
+  }
   openTutorialsDetails(tutorial)
   {
     this.router.navigate(['/tutorials/' + tutorial.id ]);
   }
 
+  setActiveTutoria(tutorial, index) {
+    this.currentTutoria = tutorial;
+    this.currentIndex = index;
+  }
   // retrieveTutorials() {
   //   this.tutorialService.getAll()
   //     .subscribe(
@@ -110,9 +155,23 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
       this.tutorialService.getTutorials(this.tutorialsPerPage, this.currentPage);
     });
   }
+  
+
+ 
 
   ngOnDestroy() {
     this.tutorialsSub.unsubscribe();
+  }
+  search() {
+    this.tutorialService.findByParams(this.title, this.description, this.faculty)
+      .subscribe(
+        data => {
+          this.tutorials_search = data;
+          console.log(data);
+        },
+        error => {
+          console.log(error);
+        });
   }
 }
 

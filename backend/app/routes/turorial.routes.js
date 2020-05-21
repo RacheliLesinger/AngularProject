@@ -35,33 +35,33 @@ module.exports = app => {
   // Create a new Tutorial
   router.post("",multer({ storage: storage }).single("img"), tutorials.create);
 
-  // Retrieve all Tutorials
-  // router.get("/", tutorials.findAll);
-  router.get("/", (req, res, next) => {
-    const pageSize = +req.query.pagesize;
-    const currentPage = +req.query.page;
-    const tutorialQuery = Tutorial.find();
-    let fetchedTutorials;
-    if (pageSize && currentPage) {
-      tutorialQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
-    }
-    tutorialQuery
-      .then(documents => {
-        fetchedTutorials = documents;
-        return Tutorial.count();
-      })
-      .then(count => {
-        res.status(200).json({
-          message: "Tutorials fetched successfully!",
-          tutorials: fetchedTutorials,
-          maxTutorials: count
-        });
-      });
-  });
+  // router.get("/", (req, res, next) => {
+  //   const pageSize = +req.query.pagesize;
+  //   const currentPage = +req.query.page;
+  //   const tutorialQuery = Tutorial.find();
+  //   let fetchedTutorials;
+  //   if (pageSize && currentPage) {
+  //     tutorialQuery.skip(pageSize * (currentPage - 1)).limit(pageSize);
+  //   }
+  //   tutorialQuery
+  //     .then(documents => {
+  //       fetchedTutorials = documents;
+  //       return Tutorial.count();
+  //     })
+  //     .then(count => {
+  //       res.status(200).json({
+  //         message: "Tutorials fetched successfully!",
+  //         tutorials: fetchedTutorials,
+  //         maxTutorials: count
+  //       });
+  //     });
+  // });
 
   // Retrieve all published Tutorials
   // router.get("/published", tutorials.findAllPublished);
 
+  // Retrieve all Tutorials
+  router.get("/", tutorials.findAll);
   // Retrieve a single Tutorial with id
   router.get("/:id", tutorials.findOne);
 

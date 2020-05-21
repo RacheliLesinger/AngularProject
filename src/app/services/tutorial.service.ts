@@ -125,6 +125,12 @@ export class TutorialService {
   findByTitle(title) {
         return this.http.get(`${baseUrl}?title=${title}`);
       }
+      
+    findByParams(title, description, faculty)
+    {
+      return this.http.get(`${baseUrl}?title=${title}&description=${description}&faculty=${faculty}`);
+    }
+    
   findByLecturer(name) {
         return this.http.get(`${baseUrl}?name=${name}`);
       }

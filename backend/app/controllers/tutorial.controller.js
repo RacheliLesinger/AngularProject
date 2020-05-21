@@ -41,21 +41,52 @@ exports.create = (req, res) => {
 });
 }
 // Retrieve all Tutorials from the database.
+// exports.findAll = (req, res) => {
+//   const title = req.query.title;
+//   var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};  
+//   Tutorial.find(condition)
+//    .populate({ path: 'faculty' ,select: 'facultyName'  /* , match: conditionfaculty  */  })
+//   .exec(function (err, data) {
+//              console.log( "leaaaaaa"); 
+
+//     if (err) return res.status(500).send({
+//       message:
+//         err.message  || "Some error occurred while retrieving users."
+//     });
+//     res.send(data);
+//   });
+// };
+
+// #######################3
+
+
+// Retrieve all Users from the database.
 exports.findAll = (req, res) => {
   const title = req.query.title;
-  var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
-
+  const faculty = req.query.faculty;
+  //var condition = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
+  //condition = status ? { status: { $regex: new RegExp(status), $options: "i" } } : {};
+  // var condition = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};  
+  
+  var conditionTitle = title ? { title: { $regex: new RegExp(title), $options: "i" } } : {};
+  var conditionDescription = description ? { description: { $regex: new RegExp(description), $options: "i" } } : {};
+  var conditionfaculty = faculty ? { faculty:  mongoose.Types.ObjectId(faculty)  }: {};
+  var condition =  { $and: [ conditionTitle,conditionDescription,conditionfaculty ]};
   Tutorial.find(condition)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
-      });
+  .find(condition)
+  .populate({ path: 'faculty' ,select: 'facultyName'  /* , match: conditionfaculty  */  })
+  .exec(function (err, data) {
+    if (err) return res.status(500).send({
+      message:
+        err.message  || "Some error occurred while retrieving users."
     });
+    res.send(data);
+  });
+  
+
+ 
 };
+// @@@@@@@@@@@@@@@@@@@@@
 
 // Find a single Tutorial with an id
 exports.findOne = (req, res) => {
