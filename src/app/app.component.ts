@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { WebSocketSubject } from 'rxjs/observable/dom/WebSocketSubject';
 import { SharedService } from './services/shared-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { interval } from 'rxjs';
+
 
 
 @Component({
@@ -13,13 +13,13 @@ import { interval } from 'rxjs';
 
 export class AppComponent {
   public serverMessage:string;
-  @ViewChild('viewer',{static: false}) private viewer: ElementRef;
+
   private socket$: WebSocketSubject<string>;
   title = 'Angular8ClientCrud';
   displaySigning:boolean;
   displayForLecturer:boolean;
   displayForStudent:boolean;
-  // secondsCounter = interval(500);
+
 
   constructor(private sharedService: SharedService,private _snackBar: MatSnackBar){
     
@@ -45,12 +45,16 @@ export class AppComponent {
       });
   }
 
+  
   openSnackBar() {
-   
+
     this._snackBar.open(this.serverMessage, '', {
       duration: 3000,});
     this.serverMessage=null
-  }
+ 
+
+}
+  
 
 
   componentAdded(component){

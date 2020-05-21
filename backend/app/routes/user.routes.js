@@ -11,7 +11,8 @@ module.exports = app => {
   
     // Retrieve all published Tutorials
     router.get("/query/numOfTutorial", users.numOfTutorial);
-  
+    router.get("/query/findExistsUse", users.findExistsUse);
+    
     // Retrieve a single Tutorial with id
     router.get("/user/:id", users.findOne);
   

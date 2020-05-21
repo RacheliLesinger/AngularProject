@@ -11,12 +11,12 @@ import { Faculty } from 'src/app/models/faculty.model';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  displayForLecturer=true
-  displayForStudent=true
- 
-  displaySigning=false;
+  displayForLecturer=false
+  displayForStudent=false
+  displaySigning=true;
+
   facultiesList:Faculty[] = [];
-  users:any=[];
+
   user = {
     first:'',
     last:'',
