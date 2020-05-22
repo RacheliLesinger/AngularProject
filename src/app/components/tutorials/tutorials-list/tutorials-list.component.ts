@@ -45,7 +45,7 @@ export class TutorialsListComponent implements OnInit , OnDestroy{
               private router: Router,
               private authonticationService: AuthonticationService,
               private facultyService: FacultyService
-
+               
             ) { 
               this.currentUser = this.authonticationService.currentUserValue;
               console.log(this.currentUser.status)

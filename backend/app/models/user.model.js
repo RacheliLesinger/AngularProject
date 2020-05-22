@@ -3,9 +3,18 @@ const rp = require('request-promise');
 const $ = require('cheerio');
 const leaAculty = require("./faculty.model.js");
 const db = require("../models");
+// const mongoose = require("mongoose");
+// const Faculty = require("./faculty.model.js")(mongoose);
 
+
+// const Faculty =  require('mongoose').model
+// Faculty = require("./tutorial.model.js");
+// const Faculty =require("./faculty.model.js");
+// const Faculty = db.faculties
+// const Faculty = mongoose.model("Faculty", schema)
   module.exports = mongoose => {
-    var schema = mongoose.Schema(
+    
+     var schema = mongoose.Schema(
       {
         first_name: { type: String, required: true },
         last_name:  { type: String, required: true },
@@ -22,12 +31,40 @@ const db = require("../models");
       },
       { timestamps: true }//תאריך יצירה
     );
+
+
+//     const createById = async ({facultyName}) => {
+//       console.log(   Faculty    );
+//       console.log(  facultyName );
+//       const matches = await Faculty.find({facultyName}).exec();
+//       console.log(   "@@@###@@$$$"    );
+//       console.log(     matches[0]['_id']    );
+//      //  return
+//   };
   
+//   function lea({facultyName}){
+//     console.log(   "@@@@@111@@@"    );
+//       const matches = Faculty.find({facultyName}).exec();
+//       console.log(     matches[0]['_id']    );
+//       console.log(   "@@@@@111@@@"    );
+//     }
+  
+//   function function_name(){
+//        lea({ facultyName: 'The School of Business Administration' } );
+//     }
+  
+// setTimeout( function_name, 30000);
+
+
+
     schema.method("toJSON", function() {
       const { __v, _id, ...object } = this.toObject();
       object.id = _id;
       return object;
     });
+
+
+
 
 // ##########init Faculty##########
 const User = mongoose.model("User", schema)
@@ -46,7 +83,7 @@ var dict = { 'The Haim Striks School of Law': '5ec3bec5aecc7c3fd09dfcf8',
   const  url='http://english.colman.ac.il/staff_members/'
   rp(url) 
    .then(function(html) { 
-  
+
       const all=[] ;
       const faculties =[];
       const faculty = []; 
@@ -84,14 +121,14 @@ var dict = { 'The Haim Striks School of Law': '5ec3bec5aecc7c3fd09dfcf8',
               first_name=all_name.slice(0,all_name.indexOf(' '));
               last_name=all_name.slice(all_name.indexOf(' ')+1,all_name.length);
               var newId = new mongoose.mongo.ObjectId(dict[faculty_]);
-            //   console.log(first_name);
+            //   console.log(all_name);
                   user = new User({
                 first_name:first_name ,
                 last_name:last_name ,
                 username:all_name ,
                 password:randomNumber,
                 status:'lecturer',
-                faculty:newId,
+                // faculty:newId,
                 email:email[i]
               });
                             user

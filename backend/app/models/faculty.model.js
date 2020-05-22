@@ -15,8 +15,8 @@ module.exports = mongoose => {
       object.id = _id;
       return object;
     });
-  
-  
+
+
      const Faculty = mongoose.model("Faculty", schema)
      const createFaculty = async ({facultyName}) => {
       const matches = await Faculty.find({facultyName}).exec();
@@ -26,11 +26,20 @@ module.exports = mongoose => {
       }
   };
 
+//   const createById = async ({facultyName}) => {
+//      const matches = await Faculty.find({facultyName}).exec();
+//      console.log(     matches[0]['_id']    );
+//     //  leaaaa.push( matches[0]['_id'])
+//     //  return
+//  };
+
+
+ 
 
   const faculties =[];
 
   // const faculties = [{
-  //   facultyName: "Economics"}, {facultyName: "Computer Science"},{facultyName: "Laws"},{facultyName: "Humen Resources"}
+  //   facultyName: "Economics"}, {facultyName: "Computer Science" ,_id:5ec6a110ca8ae61900063789},{facultyName: "Laws"},{facultyName: "Humen Resources"}
   // ];
   // faculties.forEach((element)=>(async () => {        
   //             await createFaculty(element);

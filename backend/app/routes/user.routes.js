@@ -5,6 +5,8 @@ module.exports = app => {
   
     // Create a new Tutorial
     router.post("/", users.create);
+    // router.post("/initUser", users.init);
+
   
     // Retrieve all Tutorials
     router.get("/",users.findAll);
@@ -24,7 +26,11 @@ module.exports = app => {
   
     // Create a new Tutorial
     router.delete("/", users.deleteAll);
-  
+
+    // router.get("/",faculties.getAll);
+
+    // router.get("/",users.getAll);
+
     app.use("/api/users", router);
   };
 

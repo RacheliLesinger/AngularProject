@@ -30,6 +30,9 @@ export class UserService {
   update(id, data) {
     return this.http.put(`${baseUrl}/${id}`, data);
   }
+  init(data) {
+    return this.http.post(`${baseUrl}/initUser`,data);
+  }
 
   delete(id) {
     return this.http.delete(`${baseUrl}/${id}`);
@@ -55,4 +58,6 @@ export class UserService {
   findByFaculty(faculty) {
     return this.http.get(`${baseUrl}?faculty=${faculty}`);
   }
+
+
 }

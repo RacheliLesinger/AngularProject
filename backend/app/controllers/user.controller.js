@@ -1,6 +1,8 @@
 const db = require("../models");
 const User = db.users;
 const Tutorial = db.tutorials;
+const Faculty = db.faculties;
+
 var mongoose = require('mongoose');
 
 // Create and Save a new user
@@ -54,9 +56,171 @@ exports.findExistsUse=(req, res)=>{
       .send({ message: "Error retrieving User with id=" + id });
   });
 }
+
+
+// ###############
+exports.init = (req, res) => {
+  console.log("@@@dlea11@@@@");
+
+  console.log("@@@data11ee@@@@");
+  // var dict =[ { lecturer:'Erela Amit',faculty:'The Haim Striks School of Law'}];
+  // const facultyName= dict[i].lecturer;
+  // var condition3 = facultyName ? { facultyName: { $regex: new RegExp(facultyName), $options: "i" } } : {};
+  //   Faculty.find(condition3)
+  //     .then(data => {
+  //       console.log(data[0]['_id']);
+  //       // res.send(data);
+  //     })
+  //     .catch(err => {
+  //       res.status(500).send({
+  //         message:
+  //           err.message || "Some error occurred while retrieving fuculties."
+  //       });
+  //     });
+
+  //       username=  'Erela Amit';
+  //     var condition4 = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
+  //     User.find(condition4)
+  //     .then(data => {
+  //       res.send(data);
+  //       console.log(data[0]);
+
+  //       // res.send(data);
+  //     })
+  //     .catch(err => {
+  //       res.status(500).send({
+  //         message:
+  //           err.message || "Some error occurred while retrieving fuculties."
+  //       });
+  //     });
+
+
+
+};
+  
+// ##################
 // Retrieve all Users from the database.
 exports.findAll = (req, res) => {
-  const username = req.query.username;
+  // console.log("@@@dlea11@@@@");
+  // console.log("@@@data11ee@@@@");
+  var dict =[
+  { lecturer:'Erela Amit',faculty:'The School of Business Administration'},
+  { lecturer:'Dvora Geller',faculty:'The School of Business Administration'},
+  { lecturer:'Eli Gilbai',faculty:'The School of Business Administration'},
+  { lecturer:'Abigail Hurwitz',faculty:'The School of Business Administration'},
+  { lecturer:'Eyal Inbar',faculty:'The School of Business Administration'},
+  { lecturer:'Eyal Lahav ',faculty:'The School of Business Administration'},
+  { lecturer:'Ronny Manos',faculty:'The School of Business Administration'},
+  { lecturer:'Gila Oren',faculty:'The School of Business Administration'},
+  { lecturer:'Eli Gilbai ',faculty:'The School of Business Administration'},
+  { lecturer:'Tal Shavit',faculty:'The School of Business Administration'},
+  { lecturer:'Yaakov Weber',faculty:'The School of Business Administration'},
+  { lecturer:'Ido Baum',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Orna Ben- Naftali',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Yifat Bitton',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Orna Ben- Naftali',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Orit Fischman Afori',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Yifat Holzman- Gazit ',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Yifat Bitton',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Nili Karako-eyal',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Ruthy Lowenstein Lazar',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Yuval Merin',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Roy Peled',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Karni Perlman',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Yoram Rabin',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Haim Sandberg',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Iris Soroker',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Zvi Triger',faculty:'The Haim Striks School of Law'},
+  { lecturer:'Limor Zer- Gutman',faculty:'The Haim Striks School of Law'},
+
+
+  { lecturer:'Shahar Sansani',faculty:'School of Economics'},
+  { lecturer:'Itzhak Zilcha',faculty:'School of Economics'},
+
+  
+
+  { lecturer:'Yehuda Elmaliach',faculty:'School of Computer Science'},
+  { lecturer:'Galit Haim',faculty:'School of Computer Science'},
+  { lecturer:'Samuel Itzikowitz',faculty:'School of Computer Science'},
+  { lecturer:'Igor Rochlin',faculty:'School of Computer Science'},
+
+  { lecturer:'Guy Abutbul- Selinger',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Tamar Almor',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Joy Benatov',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Hanna Benoni',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Boris Blumenstein',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Keren Friedman- Peleg',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Gillie Gabay',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Lael Gershgoren',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Anat Guy',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Iris Orbach',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'David Segal',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Keren Shakhar',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Shmuel Shulman',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Ido Ziv',faculty:'School of Behavioral Sciences & Psychology'},
+  { lecturer:'Naomi Ziv',faculty:'School of Behavioral Sciences & Psychology'},
+
+
+
+
+  { lecturer:'Dan Arav',faculty:'School of Media Studies'},
+  { lecturer:'Eva Berger',faculty:'School of Media Studies'},
+ 
+  
+
+  { lecturer:'Gavin Suss',faculty:'School of Design & Innovation'},
+
+  { lecturer:'Muhammed Abu Nasra',faculty:'The School of Education'},
+  { lecturer:'Rachel Bolless',faculty:'The School of Education'},
+  { lecturer:'Irit Harboun',faculty:'The School of Education'},
+  { lecturer:'Etti Isler',faculty:'The School of Education'},
+  { lecturer:'Irit Keynan',faculty:'The School of Education'},
+  { lecturer:'Idan Porat',faculty:'The School of Education'},
+  { lecturer:'Ronit Shalev',faculty:'The School of Education'},
+  { lecturer:'Yaron Sokolov',faculty:'The School of Education'},
+  { lecturer:'Riki Yogev',faculty:'The School of Education'}
+  
+
+
+];
+for ( x = 0; x <dict.length; x++)
+{
+  var facultyName= dict[x].faculty;
+  var condition3 = facultyName ? { facultyName: { $regex: new RegExp(facultyName), $options: "i" } } : {};
+   var id_faculty='';
+   var id_user='';
+   var json= '';
+  Faculty.find(condition3)
+      .then(data => {
+        // console.log(data);
+        id_faculty=data[0]['_id'];
+        json={faculty:new mongoose.mongo.ObjectId(id_faculty)};
+        // res.send(data);
+      })
+      .catch(err => {
+        // res.status(500).send({
+        //   message:
+        //     err.message || "Some error occurred while retrieving fuculties."
+        // });
+      });
+        username=  dict[x].lecturer;
+      var condition4 = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};
+      User.find(condition4)
+      .then(data => {
+        id_user = data[0]['_id'];
+                  // console.log(id_faculty);
+                  User.findByIdAndUpdate(id_user,json , { useFindAndModify: false })
+        .then(data => {
+        })
+        .catch(err => {
+        });
+      })
+      .catch(err => {
+      }); 
+}
+
+ 
+    username = req.query.username;
   const status = req.query.status;
   const faculty = req.query.faculty;
   //var condition = username ? { username: { $regex: new RegExp(username), $options: "i" } } : {};

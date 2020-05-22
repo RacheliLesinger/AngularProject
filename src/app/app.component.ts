@@ -2,6 +2,8 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { WebSocketSubject } from 'rxjs/observable/dom/WebSocketSubject';
 import { SharedService } from './services/shared-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { isInteropObservable } from 'rxjs/internal/util/isInteropObservable';
+import { UserService } from 'src/app/services/user.service';
 
 
 
@@ -21,9 +23,9 @@ export class AppComponent {
   displayForStudent:boolean;
 
 
-  constructor(private sharedService: SharedService,private _snackBar: MatSnackBar){
+  constructor(private userService: UserService,private sharedService: SharedService,private _snackBar: MatSnackBar){
     
-    
+    this.userService.init('');
     this.displaySigning =false;
     this.displayForLecturer=false;
     this.displayForStudent=false;
